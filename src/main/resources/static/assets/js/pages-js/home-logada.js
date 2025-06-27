@@ -53,3 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });*/
+
+/*BOAS-VINDAS MESSAGEM*/
+setTimeout(() => {
+    const alerta = document.getElementById('boas-vindas');
+    if (alerta) {
+        alerta.style.display = 'none';
+    }
+}, 5000);

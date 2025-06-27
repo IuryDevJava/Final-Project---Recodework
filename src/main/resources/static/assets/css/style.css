@@ -77,7 +77,7 @@ body {
 
 .btn-enter {
   width: var(--largura-botao);
-  background-color: rgba(134, 0, 123, 0.411);
+  background-color: rgba(0, 27, 112, 0.411);
   color: white;
 }
 
@@ -89,15 +89,15 @@ body {
 
 .btn-register {
   width: var(--largura-botao);
-  background-color: rgba(99, 42, 75, 0.849);
+  background-color: rgba(0, 12, 97, 0.849);
   color: var(--cor-branco);
   transition: ease-in-out 0.9s;
-  
+
 }
 
 .btn-register:hover {
-   background-color: rgb(88, 37, 67);
-   color: white;
+  background-color: rgb(88, 37, 67);
+  color: white;
 }
 
 /* =====================

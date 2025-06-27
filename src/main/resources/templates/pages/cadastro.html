@@ -328,7 +328,7 @@
               <h4>Faça o seu cadastro</h4>
 
               <!-- Formulário Mobile -->
-              <form th:action="@{/usuarios/cadastro}" th:object="${usuarioDTO}" method="post">
+              <form th:action="@{/cadastro}" th:object="${usuarioDTO}" method="post">
                 <!-- Campo Nome -->
                 <div class="mb-3">
                   <div class="input-group">
@@ -534,19 +534,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-      function toggleSenha(inputId, iconId) {
-        const senhaInput = document.getElementById(inputId);
-        const icon = document.getElementById(iconId);
+    <script th:src="@{/assets/js/pages-js/cadastro.js}"></script>
 
-        if (senhaInput.type === 'password') {
-          senhaInput.type = 'text';
-          icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-          senhaInput.type = 'password';
-          icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
-      }
-    </script>
   </body>
 </html>

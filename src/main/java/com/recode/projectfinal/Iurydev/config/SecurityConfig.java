@@ -16,7 +16,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/cadastro", "/entrar", "/assets/**").permitAll()
+                        .requestMatchers("/", "/home", "/cadastro", "/entrar", "/assets/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -30,7 +30,9 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/entrar?logout=true")
+                        .logoutSuccessUrl("/home")  // Redireciona para a página inicial
+                        .invalidateHttpSession(true)  // Opcional: invalida a sessão
+                        .deleteCookies("JSESSIONID")  // Opcional: remove cookies
                         .permitAll()
                 );
 

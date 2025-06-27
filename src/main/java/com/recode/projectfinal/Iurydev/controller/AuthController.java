@@ -29,6 +29,11 @@ public class AuthController {
         return "index"; // index.html está na raiz de templates
     }
 
+    @GetMapping("/home")
+    public String mostrarIndexAlternativo() {
+        return "index"; // Mesma página que "/"
+    }
+
     @GetMapping("/cadastro")
     public String mostrarPaginaCadastro(Model model) {
         model.addAttribute("usuarioDTO", UsuarioDTO.createEmpty());
@@ -64,11 +69,9 @@ public class AuthController {
         if (error != null) {
             model.addAttribute("erro", "E-mail ou senha inválidos");
         }
-
         if (logout != null) {
             model.addAttribute("sucesso", "Você foi desconectado com sucesso");
         }
-
         if (sucesso != null) {
             model.addAttribute("sucesso", "Cadastro realizado com sucesso! Faça login para continuar.");
         }
@@ -81,11 +84,10 @@ public class AuthController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
 
-        Usuario usuario = usuarioService.buscarUsuarioPorEmail(email); // novo método
+        Usuario usuario = usuarioService.buscarUsuarioPorEmail(email);
         model.addAttribute("nomeUsuario", usuario.getNome());
 
         return "pages/home-logada";
     }
-
 
 }

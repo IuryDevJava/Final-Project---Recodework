@@ -71,7 +71,7 @@ body {
 
 .btn-enter {
   width: var(--largura-botao);
-  background-color: rgba(134, 0, 123, 0.411);
+  background-color: rgba(0, 27, 112, 0.411);
   color: white;
 }
 
@@ -83,7 +83,7 @@ body {
 
 .btn-register {
   width: var(--largura-botao);
-  background-color: rgba(99, 42, 75, 0.849);
+  background-color: rgba(0, 12, 97, 0.849);
   color: var(--cor-branco);
   transition: ease-in-out 0.9s;
   
@@ -92,6 +92,44 @@ body {
 .btn-register:hover {
    background-color: rgb(88, 37, 67);
    color: white;
+}
+
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  width: 70%;
+  max-width: 300px;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: slideDown 0.5s forwards, fadeOut 0.5s forwards 4.5s;
+}
+
+@keyframes slideDown {
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+.alert-error {
+  background: #fff0f0;
+  border-left: 2px solid #87000162;
+  color: #ff4d4f;
+}
+
+.alert-success {
+  background: #f6ffedca;
+  border-left: 2px solid #52c41a;
+  color: #08a30e;
 }
 
 /* =====================
@@ -151,10 +189,6 @@ body {
   border-radius: 10px;
   transition: 0.3s;
   margin-bottom: var(--margin-entreitens);
-}
-
-.btn-login:hover {
-  background-color: #1a5b32;
 }
 
 .divider {
@@ -288,6 +322,18 @@ body {
     margin-bottom: var(--margin-entreitens);
   }
 
+  .mobile-btn-enhance {
+    --bs-btn-color: #5c636a !important; /* Cinza mais escuro */
+    --bs-btn-border-color: currentColor !important;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #5c636a !important;
+    border-width: 2px !important; /* Borda mais grossa */
+  }
+
+  #icon-mobile {
+    font-size: 1.2rem; /* Ícone maior */
+  }
+
   .title-name-footer {
     background: var(--gradiente-logo);
     background-clip: text;
@@ -332,7 +378,7 @@ body {
     );
   }
   .home-tablet img {
-    height: 384px;
+    height: 402px;
   }
 
   .login-box {
