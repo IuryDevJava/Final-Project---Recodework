@@ -1,3 +1,4 @@
+/*
 // CHAT
 document.addEventListener('DOMContentLoaded', function() {
   const chatToggle = document.getElementById('chatToggle');
@@ -51,4 +52,4 @@ document.addEventListener('DOMContentLoaded', function() {
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   }
-});
+});*/

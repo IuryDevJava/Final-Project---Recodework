@@ -9,6 +9,7 @@
     />
 
     <title>Entrar</title>
+    <link rel="shortcut icon" th:href="@{/assets/images/Logo.png}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,7 +48,7 @@
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="#">
           <img
-                  th:src="@{../assets/images/Logo.png}"
+                  th:src="@{/assets/images/Logo.png}"
             alt="Logo da Recodework"
             class="rounded-circle"
             width="50"
@@ -123,60 +124,71 @@
           <div class="login-box">
             <h4>Faça login</h4>
 
-            <!-- Campo E-mail -->
-            <div class="position-relative">
-              <div class="input-group">
-                <span class="input-group-text bg-white"
-                  ><i class="fa fa-user"></i
-                ></span>
-                <input type="email" class="form-control" placeholder="E-mail" />
-              </div>
-            </div>
+            <!-- Mensagens de feedback -->
+            <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+            <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
 
-            <!-- Campo Senha -->
-            <div class="position-relative">
-              <div class="input-group">
-                <span class="input-group-text bg-white"
-                  ><i class="fa fa-lock"></i
-                ></span>
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Senha"/>
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  onclick="toggleSenha()"
-                >
-                  <i class="fa fa-eye"></i>
+            <!-- Campo E-mail -->
+            <form th:action="@{/entrar}" method="post">
+              <!-- Campo E-mail -->
+              <div class="position-relative">
+                <div class="input-group">
+                  <span class="input-group-text bg-white"><i class="fa fa-user"></i></span>
+                  <input type="email" class="form-control"
+                         name="email"
+                         placeholder="E-mail"
+                         required />
+                </div>
+              </div>
+
+              <!-- Campo Senha -->
+              <div class="position-relative">
+                <div class="input-group">
+                  <span class="input-group-text bg-white"><i class="fa fa-lock"></i></span>
+                  <input type="password" class="form-control"
+                         name="senha"
+                         placeholder="Senha"
+                         required />
+
+                  <span class="input-group-text" id="toggleSenha" style="cursor: pointer;">
+                    <i class="bi bi-eye-fill" id="iconeOlho"></i>
+                    </span>
+
+
+                </div>
+              </div>
+
+
+              <!-- Botão Entrar -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-login">Entrar</button>
+              </div>
+
+              <!-- Divisor -->
+              <div class="divider"></div>
+
+              <!-- Botões Sociais -->
+              <div class="button-socials d-flex justify-content-between gap-2">
+                <button class="btn btn-google w-100">
+                  <i class="me-2 bi bi-google"></i>Google
+                </button>
+                <button class="btn btn-linkedin w-100">
+                  <i class="me-2 bi bi-linkedin"></i>LinkedIn
                 </button>
               </div>
-            </div>
 
-            <!-- Botão Entrar -->
-            <div class="d-grid">
-              <button class="btn btn-login">Entrar</button>
-            </div>
+              <!-- Link de cadastro -->
+              <p class="text-white mb-0">
+                Primeiro acesso?
+                <a th:href="@{/cadastro}" class="text-decoration-none text-white"
+                >Crie sua conta</a
+                >
+              </p>
+            </form>
 
-            <!-- Divisor -->
-            <div class="divider"></div>
 
-            <!-- Botões Sociais -->
-            <div class="button-socials d-flex justify-content-between gap-2">
-              <button class="btn btn-google w-100">
-                <i class="me-2 bi bi-google"></i>Google
-              </button>
-              <button class="btn btn-linkedin w-100">
-                <i class="me-2 bi bi-linkedin"></i>LinkedIn
-              </button>
-            </div>
 
-            <!-- Link de cadastro -->
-            <p class="text-small mb-0">
-              Primeiro acesso?
-              <a th:href="@{/cadastro}" class="text-decoration-none text-white"
-                >Crie sua conta</a>
-            </p>
+
           </div>
         </div>
       </div>
@@ -190,19 +202,24 @@
             <div class="login-box">
               <h4 class="text-dark">Faça login</h4>
 
-              <!-- Campo E-mail -->
-              <div class="position-relative">
-                <div class="input-group">
-                  <span class="input-group-text bg-white"
-                    ><i class="fa fa-user"></i
-                  ></span>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="E-mail"
-                  />
-                </div>
+              <!-- Mensagens de feedback -->
+              <div th:if="${param.error}" class="alert alert-danger mb-3">
+                E-mail ou senha inválidos
               </div>
+              <div th:if="${param.sucesso}" class="alert alert-success mb-3">
+                Cadastro realizado com sucesso! Faça login para continuar.
+              </div>
+
+              <!-- Formulário de Login -->
+              <form th:action="@{/entrar}" method="post">
+                <!-- Campo E-mail -->
+                <div class="mb-3">
+                  <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="fa fa-user"></i></span>
+                    <input type="email" class="form-control" name="username"
+                           placeholder="E-mail" required>
+                  </div>
+                </div>
 
               <!-- Campo Senha -->
               <div class="position-relative">
@@ -214,12 +231,11 @@
                     type="password"
                     class="form-control"
                     placeholder="Senha"
-                    id="senha"
                   />
                   <button
-                    class="btn btn-outline-secondary"
-                    type="button"
-                    onclick="toggleSenha()"
+                          class="btn btn-outline-secondary"
+                          type="button"
+                          onclick="toggleSenhaMobile()"
                   >
                     <i class="fa fa-eye"></i>
                   </button>
@@ -228,7 +244,7 @@
 
               <!-- Botão Entrar -->
               <div class="d-grid">
-                <button class="btn btn-login">Entrar</button>
+                <button type="submit" class="btn btn-login">Entrar</button>
               </div>
 
               <!-- Divisor -->
@@ -251,11 +267,12 @@
                   >Crie sua conta</a
                 >
               </p>
+              </form>
             </div>
           </div>
           <div class="col-md-6">
             <img
-                    th:src="@{../assets/images/home-lgbtqia+.jpg}"
+                    th:src="@{/assets/images/home-lgbtqia+.jpg}"
               alt="Banner ilustrativo Recodework"
               class="img-fluid"
               loading="lazy"
@@ -270,51 +287,51 @@
       <div class="container">
         <div class="row gap-3">
           <div class="col-12 order-1">
-            <div class="login-box ">
+            <div class="login-box">
               <h4>Faça login</h4>
-              <!-- Campo E-mail -->
-              <div>
-                <div class="input-group">
-                  <span class="input-group-text bg-white"
-                    ><i class="fa fa-user"></i
-                  ></span>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="E-mail"
-                  />
+
+              <!-- Mensagens de feedback -->
+              <div th:if="${param.error}" class="alert alert-danger mb-3">
+                E-mail ou senha inválidos
+              </div>
+              <div th:if="${param.sucesso}" class="alert alert-success mb-3">
+                Cadastro realizado com sucesso! Faça login para continuar.
+              </div>
+
+              <!-- Formulário de Login -->
+              <form th:action="@{/entrar}" method="post">
+                <!-- Campo E-mail -->
+                <div class="mb-3">
+                  <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="fa fa-user"></i></span>
+                    <input type="email" class="form-control" name="username"
+                           placeholder="E-mail" required>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Campo Senha -->
-              <div>
-                <div class="input-group">
-                  <span class="input-group-text bg-white"
-                    ><i class="fa fa-lock"></i
-                  ></span>
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="Senha"
-                    id="senha-mobile"
-                  />
-                  <button
-                    class="btn btn-outline-secondary"
-                    type="button"
-                    onclick="toggleSenhaMobile()"
-                  >
-                    <i class="fa fa-eye"></i>
-                  </button>
+                <!-- Campo Senha -->
+                <div class="mb-3">
+                  <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="fa fa-lock"></i></span>
+                    <input type="password" class="form-control" name="password"
+                           placeholder="Senha" required id="senha-mobile">
+                    <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            onclick="toggleSenhaMobile()"
+                    >
+                      <i class="fa fa-eye"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Botão Entrar -->
-              <div class="d-grid">
-                <button class="btn btn-login">Entrar</button>
-              </div>
+                <!-- Botão Entrar -->
+                <div class="d-grid mb-3">
+                  <button type="submit" class="btn btn-login">Entrar</button>
+                </div>
 
-              <!-- Divisor -->
-              <div class="divider"></div>
+                <!-- Divisor -->
+                <div class="divider mb-3"></div>
 
               <!-- Botões Sociais -->
               <div class="button-socials d-flex justify-content-between gap-2">
@@ -326,13 +343,14 @@
                 </button>
               </div>
 
-              <!-- Link de cadastro -->
-              <p class="text-dark mb-0">
-                Primeiro acesso?
-                <a href="cadastro.html" class="text-decoration-none text-dark"
-                  >Crie sua conta</a
-                >
-              </p>
+                <!-- Link de cadastro -->
+                <p class="text-dark mb-0">
+                  Primeiro acesso?
+                  <a th:href="@{/cadastro}" class="text-decoration-none text-dark">
+                    Crie sua conta
+                  </a>
+                </p>
+              </form>
             </div>
           </div>
 
@@ -472,6 +490,26 @@
           senha.getAttribute("type") === "password" ? "text" : "password";
         senha.setAttribute("type", tipo);
       }
+
+
+
+      const toggleSenha = document.getElementById('toggleSenha');
+      const senhaInput = document.getElementById('senhaInput');
+      const iconeOlho = document.getElementById('iconeOlho');
+
+      toggleSenha.addEventListener('click', () => {
+          const tipoAtual = senhaInput.getAttribute('type');
+          if (tipoAtual === 'password') {
+              senhaInput.setAttribute('type', 'text');
+              iconeOlho.classList.remove('bi-eye-fill');
+              iconeOlho.classList.add('bi-eye-slash-fill');
+          } else {
+              senhaInput.setAttribute('type', 'password');
+              iconeOlho.classList.remove('bi-eye-slash-fill');
+              iconeOlho.classList.add('bi-eye-fill');
+          }
+      });
+
     </script>
   </body>
 </html>

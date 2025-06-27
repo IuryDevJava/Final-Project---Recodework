@@ -9,6 +9,8 @@
     />
     <title>Home logada</title>
 
+    <link rel="shortcut icon" th:href="@{/assets/images/Logo.png}" type="image/x-icon">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,13 +44,21 @@
   </head>
 
   <body>
-    <!-- NAVBAR -->
+
+
+  <div id="boas-vindas" class="alert alert-success mt-3" role="alert">
+    Bem-vindo(a), <strong th:text="${nomeUsuario}">Usuário</strong>! 🎉
+  </div>
+
+
+
+  <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm py-4">
       <div class="container">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center gap-2" href="#">
           <img
-            src="../assets/images/Logo.png"
+            th:src="@{/assets/images/Logo.png}"
             alt="Logo da Recodework"
             class="rounded-circle"
             width="50"
@@ -118,7 +128,7 @@
                   class="rounded-circle d-flex align-items-center justify-content-center"
                   style="width: 36px; height: 36px"
                 >
-                  <img src="../assets/images/img-foto-perfil.png" alt="" />
+                  <img th:src="@{/assets/images/img-foto-perfil.png}" alt="" />
                 </div>
               </a>
               <ul
@@ -143,12 +153,10 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item text-danger" href="#"
-                    ><span class="material-symbols-outlined me-2 text-danger"
-                      >logout</span
-                    >
-                    Sair</a
-                  >
+                  <a class="dropdown-item text-danger" th:href="@{/usuarios/logout}">
+                    <span class="material-symbols-outlined me-2 text-danger">logout</span>
+                    Sair
+                  </a>
                 </li>
               </ul>
             </li>
@@ -213,7 +221,7 @@
               <div class="col-md-6">
                 <div class="vaga-card d-flex gap-3 shadow-sm align-items-start">
                   <img
-                    src="../assets/images/vagas-nomad.png"
+                    th:src="@{/assets/images/vagas-nomad.png}"
                     width="35"
                     height="35"
                   />
@@ -236,7 +244,7 @@
               <div class="col-md-6">
                 <div class="vaga-card d-flex gap-3 align-items-start">
                   <img
-                    src="../assets/images/netlify-img.png"
+                    src="@{/assets/images/netlify-img.png}"
                     width="35"
                     height="35"
                   />
@@ -259,7 +267,7 @@
               <div class="col-md-6">
                 <div class="vaga-card d-flex gap-3 align-items-start">
                   <img
-                    src="../assets/images/dropbox-img.png"
+                    th:src="@{/assets/images/dropbox-img.png}"
                     width="35"
                     height="35"
                   />
@@ -285,7 +293,7 @@
                 <div class="vaga-card d-flex gap-3 align-items-start">
                   <img
                     class="rounded-circle"
-                    src="../assets/images/maze-img.png"
+                    th:src="@{/assets/images/maze-img.png}"
                     width="35"
                     height="35"
                   />
@@ -311,7 +319,7 @@
                 <div class="vaga-card d-flex gap-3 align-items-start">
                   <img
                     class="rounded-circle"
-                    src="../assets/images/oracle_logo_icon_168918.webp"
+                    th:src="@{/assets/images/oracle_logo_icon_168918.webp}"
                     width="35"
                     height="35"
                   />
@@ -1103,5 +1111,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="/assets/js/pages-js/home-logada.js"></script>
+
+  <script>
+    setTimeout(() => {
+      const alerta = document.getElementById('boas-vindas');
+      if (alerta) {
+        alerta.style.display = 'none';
+      }
+    }, 5000);
+  </script>
+
+
   </body>
 </html>

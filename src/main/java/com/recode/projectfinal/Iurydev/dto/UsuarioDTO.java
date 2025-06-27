@@ -26,4 +26,7 @@ public record UsuarioDTO(
         @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
         String senha
 ) {
+        public static UsuarioDTO createEmpty() {
+                return new UsuarioDTO("", "", "", "", "");
+        }
 }
