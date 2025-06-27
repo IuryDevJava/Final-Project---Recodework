@@ -1,0 +1,381 @@
+/* =====================
+   VARIÁVEIS GLOBAIS
+   ===================== */
+:root {
+  --gradiente-logo: linear-gradient(
+    to left,
+    rgba(97, 187, 70, 1) 0%,
+    rgba(245, 130, 31, 1) 50%,
+    rgba(224, 58, 62, 1) 75%,
+    rgba(150, 61, 151, 1) 88%,
+    rgba(0, 157, 220, 1) 94%,
+    rgba(253, 184, 39, 1) 100%
+  );
+
+  --cor-primaria: #d4d4fc;
+  --cor-texto: #333;
+  --cor-texto-claro: #555;
+  --cor-fundo-claro: #f8f9fa;
+  --cor-branco: #ffffff;
+  --cor-sombra: rgba(0, 0, 0, 0.1);
+  --cor-overlay: rgba(0, 0, 0, 0.5);
+
+  --sombra-card: 0 2px 8px var(--cor-sombra);
+  --sombra-card-hover: 0 6px 12px var(--cor-sombra);
+  --sombra-card-destaque: 0 10px 20px rgba(0, 0, 0, 0.562);
+
+  --transicao-padrao: all 0.3s ease;
+  --transicao-rapida: all 0.25s ease;
+
+  --borda-arredondada: 16px;
+  --borda-arredondada-pequena: 8px;
+  --borda-arredondada-minima: 999px;
+
+  --padding-section: 3rem 0;
+  --padding-card: 20px;
+  --padding-mobile: 40px 0 20px;
+
+  --largura-botao: 120px;
+  --altura-card-vaga: 180px;
+  --altura-card-imagem: 280px;
+
+  --opacidade-padrao: 0.8;
+  --opacidade-reduzida: 0.178;
+}
+
+/* =====================
+   ESTILOS BASE
+   ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: var(--cor-texto);
+  line-height: 1.6;
+  background-color: var(--cor-branco);
+}
+
+/* =====================
+   COMPONENTES GLOBAIS
+   ===================== */
+.nav-link:hover {
+  transform: scale(1.05);
+  transition: ease-in-out 0.5s;
+}
+
+.title-logo {
+  background: var(--gradiente-logo);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: var(--opacidade-padrao);
+}
+
+.btn-enter {
+  width: var(--largura-botao);
+  background-color: rgba(134, 0, 123, 0.411);
+  color: white;
+}
+
+.btn-enter:hover {
+  background-color: rgb(167, 131, 136);
+  color: white;
+  transition: ease-in-out 0.9s;
+}
+
+.btn-register {
+  width: var(--largura-botao);
+  background-color: rgba(99, 42, 75, 0.849);
+  color: var(--cor-branco);
+  transition: ease-in-out 0.9s;
+  
+}
+
+.btn-register:hover {
+   background-color: rgb(88, 37, 67);
+   color: white;
+}
+
+/* =====================
+   SEÇÃO HOME
+   ===================== */
+.home-section {
+  background-image: url("../images/home-lgbtqia%2B.jpg");
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  color: var(--cor-branco);
+}
+
+.home-section-text {
+  max-width: 600px;
+  width: 30%;
+}
+
+.home-section::before {
+  background: var(--cor-overlay);
+}
+
+/* =====================
+   SEÇÃO VAGAS
+   ===================== */
+.vagas-section {
+  background-color: #949494a8;
+  padding: var(--padding-section);
+}
+
+.vaga-card {
+  background: var(--cor-branco);
+  border-radius: var(--borda-arredondada);
+  box-shadow: var(--sombra-card);
+  height: var(--altura-card-vaga);
+  padding: var(--padding-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transicao-rapida);
+}
+
+.vaga-card > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.vaga-card .d-flex.flex-wrap {
+  margin-top: auto;
+}
+
+.vaga-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-card-hover);
+}
+
+.vaga-card h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.vaga-card .empresa-local {
+  font-size: 0.9rem;
+  color: #718096;
+  margin-bottom: 12px;
+}
+
+.badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.vaga-card .text-muted.small {
+  min-height: 1.5rem;
+}
+
+/* Badges */
+.badge-custom {
+  font-size: 0.75rem;
+  padding: 5px 10px;
+  border-radius: var(--borda-arredondada-minima);
+  font-weight: 500;
+}
+
+.badge-custom.tempo {
+  background-color: #d4f8e8;
+  color: #28a745;
+}
+
+.badge-custom.lgbt {
+  background-color: #fff3cd;
+  color: #d39e00;
+}
+
+.badge-custom.area {
+  background-color: #e7e3fc;
+  color: #5f45c5;
+}
+
+/* =====================
+   SEÇÃO CURSOS
+   ===================== */
+
+.section-cursos {
+  padding: var(--padding-section);
+}
+
+#cursos .card {
+  transition: transform var(--transicao-padrao),
+    box-shadow var(--transicao-padrao);
+  border-radius: var(--borda-arredondada);
+  background-color: rgba(255, 192, 203, var(--opacidade-reduzida));
+}
+
+#cursos .card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--sombra-card-destaque);
+}
+
+#cursos .card-img-container {
+  border-radius: var(--borda-arredondada) var(--borda-arredondada) 0 0;
+}
+
+.card-img-top {
+  background-color: red;
+}
+
+#cursos .card-img-top {
+  border-radius: var(--borda-arredondada-pequena);
+  height: var(--altura-card-imagem);
+  object-fit: cover;
+}
+
+#cursos .card-body {
+  padding: 1.5rem;
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+.footer-class {
+  background-color: var(--cor-primaria);
+  padding: var(--padding-section);
+}
+
+.title-name-footer {
+  background: var(--gradiente-logo);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: var(--opacidade-padrao);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: -0.6rem;
+}
+
+.footer-nav-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.footer-nav-list li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav-list a {
+  color: var(--cor-texto-claro);
+  text-decoration: none;
+  transition: var(--transicao-padrao);
+  display: inline-block;
+}
+
+.footer-nav-list a:hover {
+  color: var(--cor-texto);
+  transform: translateX(3px);
+}
+
+.social-icons a {
+  transition: var(--transicao-padrao);
+  display: inline-block;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.footer-copyright {
+  background-color: var(--cor-branco);
+  border-top: 1px solid var(--cor-sombra);
+  color: #666;
+}
+
+/* =====================
+   MEDIA QUERIES
+   ===================== */
+@media (max-width: 768px) {
+  .home-mobile-img img {
+    width: 100%;
+    border-radius: var(--borda-arredondada);
+  }
+
+  .home-section {
+    background-color: var(--cor-fundo-claro);
+    color: var(--cor-texto);
+  }
+
+  .title-name-footer {
+    background: var(--gradiente-logo);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: var(--opacidade-padrao);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: -0.6rem;
+
+    /* Garantir que o gradiente seja centralizado e consistente */
+    background-size: 55%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .footer-nav-col {
+    padding: 2rem 0 0;
+  }
+
+  .footer-class {
+    text-align: center;
+  }
+
+  .footer-brand-col {
+    padding-right: 0;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .footer-nav-list li {
+    margin-bottom: 0.4rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-tablet img {
+    height: 400px;
+    width: 450px;
+    border-radius: var(--borda-arredondada);
+  }
+
+  .footer-brand-col {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .footer-class .row {
+    --bs-gutter-x: 1.5rem;
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+  }
+
+  .footer-class .col-lg-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .footer-class .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}

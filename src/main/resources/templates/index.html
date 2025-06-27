@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta
+            name="description"
+            content="Página inicial Plataforma de networking e capacitação para profissionais LGBTQIA+"
+    />
+
+    <title>Recodework</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- Material Symbols -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
+    />
+    <!-- Bootstrap -->
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+</head>
+
+<body>
+<!-- NAVBAR py-3 -->
+<nav class="navbar m-0 p-0 py-4 navbar-expand-lg bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <img
+                    th:src="@{assets/images/Logo.png}"
+                    alt="Logo da Recodework"
+                    class="rounded-circle"
+                    width="50"
+                    height="50"
+                    style="background-color: rgba(32, 32, 32, 0.178)"
+            />
+            <h1 class="title-logo fs-4 mb-0">Recodework</h1>
+        </a>
+
+        <!-- Botão hambúrguer -->
+        <a
+                class="d-lg-none text-secondary-emphasis"
+                role="button"
+                aria-label="Abrir menu"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+        >
+            <span class="material-symbols-outlined">menu</span>
+        </a>
+
+        <!-- Itens do menu -->
+        <div
+                class="collapse navbar-collapse justify-content-end"
+                id="navbarNavDropdown"
+        >
+            <ul class="navbar-nav align-items-lg-center gap-lg-2">
+                <li class="nav-item">
+                    <a
+                            class="nav-link text-dark"
+                            href="#vagas"
+                            target="_top"
+                            aria-current="page"
+                    >Vagas</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link text-dark"
+                            href="#cursos"
+                            target="_top"
+                            aria-current="page"
+                    >Cursos</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link text-dark"
+                            href="#contato"
+                            target="_top"
+                            aria-current="page"
+                    >Contato</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/entrar}">
+                        <button class="btn btn-enter rounded-3 ms-lg-1 mb-1 mb-lg-0">
+                            Entrar
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/cadastro}">
+                        <button class="btn btn-register rounded-3 ms-lg-0">
+                            Cadastre-se
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HOME DESKTOP (≥ 1025px) -->
+<section class="home-section d-none d-lg-flex align-items-center">
+    <div class="container">
+        <div class="home-section-text col-lg-6">
+            <h2 class="mb-4">Boas-vindas à Recodework</h2>
+            <p class="mb-3">
+                Faça networking no Brasil com profissionais <br/>
+                e estudantes LGBTQIA+.
+            </p>
+            <p class="mb-3">
+                Promovemos a capacitação e a geração de oportunidades para pessoas
+                da comunidade LGBTQIA+.
+            </p>
+            <p>
+                Em nossa plataforma, você cria redes de contato e interage com
+                profissionais da área de atuação de seu interesse, aprimora suas
+                habilidades por meio de cursos e ainda encontra oportunidades no
+                mercado de trabalho.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- HOME TABLET (769px–1024px)-->
+<section class="home-tablet d-none d-md-block d-lg-none py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 home-tablet-text mb-4 mb-md-0">
+                <h2 class="mb-4">Boas-vindas à Recodework</h2>
+                <p class="mb-3">
+                    Faça networking no Brasil com profissionais <br/>
+                    e estudantes LGBTQIA+.
+                </p>
+                <p class="mb-3">
+                    Promovemos a capacitação e a geração de oportunidades para pessoas
+                    da comunidade LGBTQIA+.
+                </p>
+                <p class="m-0">
+                    Em nossa plataforma, você cria redes de contato e interage com
+                    profissionais da área de atuação de seu interesse, aprimora suas
+                    habilidades por meio de cursos e ainda encontra oportunidades no
+                    mercado de trabalho.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img
+                        th:src="@{assets/images/home-lgbtqia+.jpg}"
+                        alt="Banner ilustrativo Recodework"
+                        class="img-fluid shadow"
+                        loading="lazy"
+                />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOME MOBILE (≤ 768px) py-5 -->
+<section class="home-mobile d-block d-md-none py-5">
+    <div class="container home-mobile-text">
+        <h4 class="mb-3">Boas-vindas à Recodework</h4>
+        <p class="mb-3">
+            Faça networking no Brasil com profissionais <br/>
+            e estudantes LGBTQIA+.
+        </p>
+        <p class="mb-3">
+            Promovemos a capacitação e a geração de oportunidades para pessoas da
+            comunidade LGBTQIA+.
+        </p>
+        <p class="">
+            Em nossa plataforma, você cria redes de contato e interage com
+            profissionais da área de atuação de seu interesse, aprimora suas
+            habilidades por meio de cursos e ainda encontra oportunidades no
+            mercado de trabalho.
+        </p>
+    </div>
+    <div class="container home-mobile-img">
+        <img
+                th:src="@{assets/images/home-lgbtqia+.jpg}"
+                alt="Banner Recode"
+                loading="lazy"
+        />
+    </div>
+</section>
+
+<section class="vagas-section" id="vagas">
+    <main class="main-vagas">
+        <div class="vagas-container container">
+            <!-- Cabeçalho da seção -->
+            <div
+                    class="vagas-header d-flex align-items-center justify-content-between mb-3"
+            >
+                <h3 class="mb-0">Nossas vagas</h3>
+                <a th:href="@{/entrar}"
+                   class="d-flex align-items-center text-decoration-none text-dark">
+                    <span class="me-1">ver mais</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
+            <!-- Grid de vagas -->
+            <div class="row gy-4">
+                <!-- Card de vaga 1 -->
+                <div class="col-md-6">
+                    <div class="vaga-card shadow-sm d-flex gap-3 align-items-start">
+                        <img
+                                th:src="@{assets/images/vagas-nomad.png}"
+                                alt="Logo Nomad"
+                                width="45"
+                                height="44"
+                                loading="lazy"
+                        />
+                        <div>
+                            <h5 class="mb-1">Social Media</h5>
+                            <p class="mb-2 text-muted small">Nomad • São Paulo</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge badge-custom tempo">Tempo integral</span>
+                                <span class="badge badge-custom lgbt">LGBTQIA+</span>
+                                <span class="badge badge-custom area">Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de vaga 2 -->
+                <div class="col-md-6">
+                    <div class="vaga-card shadow-sm d-flex gap-3 align-items-start">
+                        <img
+                                th:src="@{assets/images/netlify-img.png}"
+                                alt="Logo Nomad"
+                                width="45"
+                                height="48"
+                                loading="lazy"
+                        />
+                        <div>
+                            <h5 class="mb-1">Social Media Assistant</h5>
+                            <p class="mb-2 text-muted small">Netlify • São Paulo</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge badge-custom tempo">Tempo integral</span>
+                                <span class="badge badge-custom lgbt">LGBTQIA+</span>
+                                <span class="badge badge-custom area">Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de vaga 3 -->
+                <div class="col-md-6">
+                    <div class="vaga-card shadow-sm d-flex gap-3 align-items-start">
+                        <img
+                                th:src="@{assets/images/dropbox-img.png}"
+                                alt="Logo Nomad"
+                                width="45"
+                                height="48"
+                                loading="lazy"
+                        />
+                        <div>
+                            <h5 class="mb-1">Desenvolvedor Full Stack</h5>
+                            <p class="mb-2 text-muted small">Dropbox • Rio de Janeiro</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge badge-custom tempo">Tempo integral</span>
+                                <span class="badge badge-custom lgbt">LGBTQIA+</span>
+                                <span class="badge badge-custom area">Full Stack</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de vaga 4 -->
+                <div class="col-md-6">
+                    <div class="vaga-card shadow-sm d-flex gap-3 align-items-start">
+                        <img
+                                class="rounded-circle"
+                                th:src="@{assets/images/maze-img.png}"
+                                alt="Logo Nomad"
+                                width="45"
+                                height="41"
+                                loading="lazy"
+                        />
+                        <div>
+                            <h5 class="mb-1">Brand Designer</h5>
+                            <p class="mb-2 text-muted small">Maze • San Francisco, USA</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge badge-custom tempo">Tempo integral</span>
+                                <span class="badge badge-custom lgbt">LGBTQIA+</span>
+                                <span class="badge badge-custom area">Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de vaga 5 -->
+                <div class="col-md-6">
+                    <div class="vaga-card shadow-sm d-flex gap-3 align-items-start">
+                        <img
+                                class="rounded-circle"
+                                th:src="@{assets/images/oracle_logo_icon_168918.webp}"
+                                alt="Logo Nomad"
+                                width="45"
+                                height="48"
+                                loading="lazy"
+                        />
+                        <div>
+                            <h5 class="mb-1">Interactive Developer</h5>
+                            <p class="mb-2 text-muted small">Oracle • São Paulo</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge badge-custom tempo">Tempo integral</span>
+                                <span class="badge badge-custom lgbt">LGBTQIA+</span>
+                                <span class="badge badge-custom area">Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de vaga 6 -->
+                <div class="col-md-6">
+                    <div class="vaga-card shadow-sm d-flex gap-3 align-items-start">
+                        <img
+                                class="rounded-circle"
+                                th:src="@{assets/images/udacity.png}"
+                                alt="Logo Nomad"
+                                width="45"
+                                height="45"
+                                loading="lazy"
+                        />
+                        <div>
+                            <h5 class="mb-1">Social Media</h5>
+                            <p class="mb-2 text-muted small">
+                                Udacity • Hamburg, Germany
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge badge-custom tempo">Tempo integral</span>
+                                <span class="badge badge-custom lgbt">LGBTQIA+</span>
+                                <span class="badge badge-custom area">Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>
+
+<!--SEÇÃO CURSOS -->
+<section class="section-cursos" id="cursos">
+    <div class="container">
+        <h2 class="mb-3">Nossos Cursos</h2>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-img-container p-3">
+                        <img th:src="@{/assets/images/cursos-fullstack.jpg}"
+                             class="card-img-top rounded-4"
+                             alt="Full Stack + Java"
+                             loading="lazy"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-danger fw-bold">
+                            Full Stack + Java
+                        </h5>
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <span class="visually-hidden">Avaliação: 5 estrelas</span>
+                        </div>
+                        <ul class="list-unstyled text-start">
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Criação de APIs RESTful com Spring Boot
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Integração com MySQL
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Front-end reativo com HTML, CSS e JavaScript
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-img-container p-3">
+                        <img th:src="@{assets/images/cursos-ux.jpg}"
+                             class="card-img-top rounded-4"
+                             alt="UX/UI Design"
+                             loading="lazy"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-danger fw-bold">UX/UI Design</h5>
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <span class="visually-hidden">Avaliação: 5 estrelas</span>
+                        </div>
+                        <ul class="list-unstyled text-start">
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Métricas de UX/UI
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Prototipagem e microinterações
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>UX
+                                Strategy
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-img-container p-3">
+                        <img th:src="@{assets/images/Analistadados.jpg}"
+                             class="card-img-top rounded-4"
+                             alt="Analista de Dados"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-danger fw-bold">
+                            Analista de Dados
+                        </h5>
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <span class="visually-hidden">Avaliação: 5 estrelas</span>
+                        </div>
+                        <ul class="list-unstyled text-start">
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Lógica de programação e Python
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Manipulação de dados com Python
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Processamento de dados e Big Data
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-img-container p-3">
+                        <img th:src="@{assets/images/Socialmedia.jpg}"
+                             class="card-img-top rounded-4"
+                             alt="Social Media"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-danger fw-bold">Social Media</h5>
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <span class="visually-hidden">Avaliação: 5 estrelas</span>
+                        </div>
+                        <ul class="list-unstyled text-start">
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Planejamento
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Postagem e agendamento
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i
+                                >Social Analytics
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-class">
+    <div class="container px-lg-3">
+        <div class="row">
+            <!-- Coluna Logo e Redes Sociais -->
+            <div class="col-lg-3 col-md-12">
+                <div class="footer-brand-col">
+                    <h4 class="title-name-footer mb-3">Recodework</h4>
+                    <div class="social-icons d-flex">
+                        <a href="#" aria-label="Instagram" class="me-3">
+                            <img th:src="@{assets/icons/instagram-icon.png}"
+                                 alt="Instagram"
+                                 width="33"
+                                 height="31"
+                                 loading="lazy"
+                            />
+                        </a>
+                        <a href="#" aria-label="Twitter" class="me-3">
+                            <img th:src="@{assets/icons/twitter-icon.png}"
+                                 alt="X (Twitter)"
+                                 width="33"
+                                 height="31"
+                                 loading="lazy"
+                            />
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="me-3">
+                            <img th:src="@{assets/icons/linkedin-icon.png}"
+                                 alt="LinkedIn"
+                                 width="33"
+                                 height="31"
+                                 loading="lazy"
+                            />
+                        </a>
+                        <a href="#" aria-label="YouTube">
+                            <img th:src="@{assets/icons/youtube-icon.png}"
+                                    alt="YouTube"
+                                    width="33"
+                                    height="31"
+                                    loading="lazy"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colunas de Links - Agrupadas para melhor alinhamento -->
+            <div class="col-lg-9 col-md-12">
+                <div class="row gx-4 gx-lg-5">
+                    <!-- Casos de uso -->
+                    <div class="col-md-4 col-12">
+                        <div class="footer-nav-col">
+                            <h6 class="footer-title"><strong>Casos de uso</strong></h6>
+                            <ul class="footer-nav-list">
+                                <li><a href="#">UI design</a></li>
+                                <li><a href="#">UX design</a></li>
+                                <li><a href="#">Full Stack</a></li>
+                                <li><a href="#">Diagramação</a></li>
+                                <li><a href="#">Brainstorming</a></li>
+                                <li><a href="#">Professores online</a></li>
+                                <li><a href="#">Time de colaboração</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Recursos -->
+                    <div class="col-md-4 col-12">
+                        <div class="footer-nav-col">
+                            <h6 class="footer-title"><strong>Recursos</strong></h6>
+                            <ul class="footer-nav-list">
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Boas práticas</a></li>
+                                <li><a href="#">Cores</a></li>
+                                <li><a href="#">Roda de cores</a></li>
+                                <li><a href="#">Suporte</a></li>
+                                <li><a href="#">Desenvolvedores</a></li>
+                                <li><a href="#">Biblioteca</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Contatos -->
+                    <div class="col-md-4 col-12" id="contato">
+                        <div class="footer-nav-col">
+                            <h6 class="footer-title"><strong>Contato</strong></h6>
+                            <ul class="footer-nav-list">
+                                <li><a href="#">Rio de janeiro</a></li>
+                                <li><a href="#">parcerias@recode.org.br</a></li>
+                                <li><a href="#">contato@recode.org.br</a></li>
+                                <li><a href="#">atendimento@recode.org.br</a></li>
+                                <li><a href="#">https://www.linkedin.com/recode</a></li>
+                                <li><a href="#">http://www.recode.org.br</a></li>
+                                <li><a href="#">(21) 99665-6595</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="footer-copyright text-center pb-3 py-4">
+    <p class="mb-2 small">© 2025 Recodework. Todos os direitos reservados</p>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
