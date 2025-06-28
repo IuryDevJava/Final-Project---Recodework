@@ -191,6 +191,11 @@ body {
   margin-bottom: var(--margin-entreitens);
 }
 
+.btn-login:hover{
+  background-color: #226d3d;
+  color: white;
+}
+
 .divider {
   height: 1px;
   background: #ccc;
@@ -410,8 +415,8 @@ body {
 @media (min-width: 992px) and (max-width: 1199px) {
   .footer-class .row {
     --bs-gutter-x: 1.5rem;
-    margin-right: calc(-0.5 * var(--bs-gutter-x));
-    margin-left: calc(-0.5 * var(--bs-gutter-x));
+    /*margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));*/
   }
 
   .footer-class .col-lg-8 {

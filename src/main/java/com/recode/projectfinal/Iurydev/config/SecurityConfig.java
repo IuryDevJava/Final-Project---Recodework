@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,24 +16,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/home", "/cadastro", "/entrar", "/assets/**").permitAll()
+                        .requestMatchers(
+                                "/", "/home", "/cadastro", "/entrar",
+                                "/assets/**", "/vagas/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/entrar")
-                        .loginProcessingUrl("/entrar")  // URL que processa o login
-                        .usernameParameter("email")     // Campo do formulário
-                        .passwordParameter("senha")     // Campo do formulário
-                        .defaultSuccessUrl("/home-logada", true)
+                        .loginProcessingUrl("/entrar")
+                        .usernameParameter("email")
+                        .passwordParameter("senha")
+                        .defaultSuccessUrl("/vagas/home-logada", true)  // ← Atualizei para a URL correta
                         .failureUrl("/entrar?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/home")  // Redireciona para a página inicial
-                        .invalidateHttpSession(true)  // Opcional: invalida a sessão
-                        .deleteCookies("JSESSIONID")  // Opcional: remove cookies
+                        .logoutSuccessUrl("/home")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 );
 

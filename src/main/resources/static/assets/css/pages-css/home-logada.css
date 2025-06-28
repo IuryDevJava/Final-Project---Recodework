@@ -343,6 +343,39 @@ body {
   box-shadow: 0 0 0 0.25rem rgba(0, 101, 73, 0.1);
 }
 
+.custom-alert {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.alert-success {
+  background-color: #238a00be;
+  color: #f0fff5;
+  border-left: 4px solid #22c55e;
+}
+
+.alert-error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
+
+.custom-alert svg {
+  flex-shrink: 0;
+}
+
+.custom-alert .font-semibold {
+  font-weight: 600;
+}
+
+.custom-alert .text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 /* =====================
    SEÇÃO CURSOS GRATUITOS
    ===================== */
@@ -776,8 +809,8 @@ i {
 @media (min-width: 992px) and (max-width: 1199px) {
   .footer-class .row {
     --bs-gutter-x: 1.5rem;
-    margin-right: calc(-0.5 * var(--bs-gutter-x));
-    margin-left: calc(-0.5 * var(--bs-gutter-x));
+    /*margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));*/
   }
 
   .footer-class .col-lg-8 {

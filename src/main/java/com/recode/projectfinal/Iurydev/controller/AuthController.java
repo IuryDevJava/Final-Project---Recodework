@@ -79,7 +79,7 @@ public class AuthController {
         return "pages/entrar";
     }
 
-    @GetMapping("/home-logada")
+    /*@GetMapping("/home-logada")
     public String mostrarHomeLogada(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
@@ -88,6 +88,6 @@ public class AuthController {
         model.addAttribute("nomeUsuario", usuario.getNome());
 
         return "pages/home-logada";
-    }
+    }*/
 
 }

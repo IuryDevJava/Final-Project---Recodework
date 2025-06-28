@@ -44,12 +44,22 @@
 </head>
 
 <body>
-
-
 <div id="boas-vindas" class="alert alert-success mt-3" role="alert">
     Bem-vindo(a), <strong th:text="${nomeUsuario}">Usuário</strong>! 🎉
 </div>
 
+<div id="alerts-container">
+    <div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <span th:text="${sucesso}">Mensagem de sucesso</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <span th:text="${erro}">Mensagem de erro</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-white shadow-sm py-4">
@@ -216,7 +226,7 @@
             <div class="vagas-wrapper">
                 <div
                         class="vagas-header align-items-center justify-content-between mb-4"
-                >
+                        Stored Procedures                >
                     <h4 class="text-white">Aproveite as melhores vagas</h4>
                 </div>
 
@@ -239,7 +249,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Design</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="1">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -261,7 +273,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Design</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="2">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -286,7 +300,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Full Stack</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="3">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -312,7 +328,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Design</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="4">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -336,7 +354,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Design</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="5">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -362,7 +382,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Design</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="6">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -386,7 +408,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Back-End</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="7">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -410,7 +434,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">DevOps</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="8">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -432,7 +458,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Data Science</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="9">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -452,7 +480,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Qualidade</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="10">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -474,7 +504,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">IA/ML</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="11">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -498,7 +530,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Segurança</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="12">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -520,7 +554,9 @@
                                     <span class="badge badge-custom lgbt">LGBTQIA+</span>
                                     <span class="badge badge-custom area">Produto</span>
                                 </div>
-                                <button class="btn btn-apply">Candidatar-se</button>
+                                <button class="btn btn-apply" data-bs-toggle="modal"
+                                        data-bs-target="#applicationModal"
+                                        data-vaga-id="13">Candidatar-se</button>
                             </div>
                         </div>
                     </div>
@@ -528,6 +564,9 @@
             </div>
         </main>
     </div>
+
+
+
 
     <!-- Modal de Candidatura -->
     <div
@@ -564,62 +603,50 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <form id="applicationForm">
+                            <form id="applicationForm" th:action="@{/vagas/candidatar}" method="post" enctype="multipart/form-data">
+                                <!-- Campo oculto para o ID da vaga -->
+                                <input type="hidden" name="vagaId" id="hiddenVagaId" value="">
+
                                 <h6>Preencha seus dados</h6>
                                 <div class="mb-3">
-                                    <label for="applicantName" class="form-label"
-                                    >Nome Completo</label
-                                    >
-                                    <input
-                                            type="text"
-                                            class="form-control"
-                                            id="applicantName"
-                                            required
-                                    />
+                                    <label for="applicantName" class="form-label">Nome Completo</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="applicantName"
+                                           name="nomeCandidato"
+                                           required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="applicantEmail" class="form-label"
-                                    >E-mail</label
-                                    >
-                                    <input
-                                            type="email"
-                                            class="form-control"
-                                            id="applicantEmail"
-                                            required
-                                    />
+                                    <label for="applicantEmail" class="form-label">E-mail</label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="applicantEmail"
+                                           name="emailCandidato"
+                                           required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="applicantPhone" class="form-label"
-                                    >Telefone</label
-                                    >
-                                    <input
-                                            type="tel"
-                                            class="form-control"
-                                            id="applicantPhone"
-                                            required
-                                    />
+                                    <label for="applicantPhone" class="form-label">Telefone</label>
+                                    <input type="tel"
+                                           class="form-control"
+                                           id="applicantPhone"
+                                           name="telefoneCandidato"
+                                           required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="applicantResume" class="form-label"
-                                    >Currículo (PDF ou DOCX)</label
-                                    >
-                                    <input
-                                            type="file"
-                                            class="form-control"
-                                            id="applicantResume"
-                                            accept=".pdf,.doc,.docx"
-                                            required
-                                    />
+                                    <label for="applicantResume" class="form-label">Currículo (PDF ou DOCX)</label>
+                                    <input type="file"
+                                           class="form-control"
+                                           id="applicantResume"
+                                           name="curriculo"
+                                           accept=".pdf,.doc,.docx"
+                                           required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="applicantMessage" class="form-label"
-                                    >Mensagem (opcional)</label
-                                    >
-                                    <textarea
-                                            class="form-control"
-                                            id="applicantMessage"
-                                            rows="3"
-                                    ></textarea>
+                                    <label for="applicantMessage" class="form-label">Mensagem (opcional)</label>
+                                    <textarea class="form-control"
+                                              id="applicantMessage"
+                                              name="mensagem"
+                                              rows="3"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-apply w-100">
                                     Enviar Candidatura
@@ -1098,6 +1125,184 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 <script th:src="@{/assets/js/pages-js/home-logada.js}"></script>
+
+<!--<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        // =============================================
+        // 1. Controle de Mensagens (Alertas)
+        // =============================================
+        function setupAlerts() {
+            // Fecha automaticamente as mensagens após 5 segundos
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 5000);
+            });
+
+            // Rola até a seção de vagas se houver mensagem
+            if (window.location.hash === '#vagas' && document.querySelector('.alert')) {
+                document.getElementById('vagas').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // =============================================
+        // 2. Controle da Modal de Candidatura
+        // =============================================
+        function setupApplicationModal() {
+            const applicationModal = document.getElementById('applicationModal');
+            if (!applicationModal) return;
+
+            const modalInstance = new bootstrap.Modal(applicationModal);
+
+            applicationModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const vagaId = button.getAttribute('data-vaga-id');
+
+                // Define o ID da vaga no campo hidden
+                document.getElementById('hiddenVagaId').value = vagaId;
+
+                // Reset do formulário
+                const form = document.getElementById('applicationForm');
+                form.reset();
+
+                // Remove mensagens de erro anteriores
+                const existingError = form.querySelector('.alert-danger');
+                if (existingError) existingError.remove();
+
+                // Buscar detalhes da vaga via API
+                fetch(`/vagas/detalhes/${vagaId}`)
+                    .then(response => {
+                    if (!response.ok) throw new Error('Vaga não encontrada');
+                    return response.json();
+                })
+                    .then(vaga => {
+                    // Preencher os dados da vaga na modal
+                    document.getElementById('jobTitle').textContent = vaga.titulo;
+                    document.getElementById('jobCompany').textContent =
+                    `${vaga.empresa} • ${vaga.localizacao}`;
+
+                    // Preencher badges
+                    const badgesContainer = document.getElementById('jobBadges');
+                    badgesContainer.innerHTML = `
+                        <span class="badge badge-custom tempo">${vaga.tipoContrato}</span>
+                        ${vaga.lgbtqiaFriendly ?
+                          '<span class="badge badge-custom lgbt">LGBTQIA+</span>' : ''}
+                        <span class="badge badge-custom area">${vaga.area}</span>
+                    `;
+
+                    // Preencher descrição
+                    document.getElementById('jobDescription').innerHTML =
+                    `<p>${vaga.descricao}</p>`;
+                })
+                    .catch(error => {
+                    console.error('Erro:', error);
+                    modalInstance.hide();
+
+                    // Mostra mensagem de erro global
+                    const errorAlert = document.createElement('div');
+                    errorAlert.className = 'alert alert-danger mt-3';
+                    errorAlert.textContent = 'Erro ao carregar detalhes da vaga';
+                    document.body.prepend(errorAlert);
+                    setTimeout(() => errorAlert.remove(), 5000);
+                });
+            });
+        }
+
+        // =============================================
+        // 3. Controle do Formulário de Candidatura
+        // =============================================
+        function setupApplicationForm() {
+            const applicationForm = document.getElementById('applicationForm');
+            if (!applicationForm) return;
+
+            applicationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const submitButton = this.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.innerHTML =
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else if (!response.ok) {
+                        throw new Error('Erro no servidor');
+                    }
+                    return response.text();
+                })
+                    .catch(error => {
+                    console.error('Error:', error);
+                    const errorContainer = document.createElement('div');
+                    errorContainer.className = 'alert alert-danger mt-3';
+                    errorContainer.textContent = 'Erro ao enviar candidatura: ' +
+                    (error.message || 'Erro desconhecido');
+
+                    const existingError = this.querySelector('.alert-danger');
+                    if (existingError) {
+                        existingError.replaceWith(errorContainer);
+                    } else {
+                        this.appendChild(errorContainer);
+                    }
+                })
+                    .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Enviar Candidatura';
+                });
+            });
+        }
+
+        // =============================================
+        // 4. Máscara para Telefone
+        // =============================================
+        function setupPhoneMask() {
+            const phoneInput = document.getElementById('applicantPhone');
+            if (!phoneInput) return;
+
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.substring(0, 11);
+
+                // Formatação: (XX) XXXXX-XXXX
+                if (value.length > 2) {
+                    value = `(${value.substring(0,2)}) ${value.substring(2)}`;
+                }
+                if (value.length > 10) {
+                    value = `${value.substring(0,10)}-${value.substring(10)}`;
+                }
+
+                e.target.value = value;
+            });
+        }
+
+        // =============================================
+        // 5. Verificação de Mensagens na URL
+        // =============================================
+        function checkUrlForMessages() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('sucesso') || urlParams.has('erro')) {
+                document.getElementById('vagas')?.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // =============================================
+        // Inicialização de todos os componentes
+        // =============================================
+        setupAlerts();
+        setupApplicationModal();
+        setupApplicationForm();
+        setupPhoneMask();
+        checkUrlForMessages();
+    });
+</script>-->
 
 </body>
 </html>
