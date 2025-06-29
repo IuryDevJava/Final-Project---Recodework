@@ -39,7 +39,7 @@ public class VagaController {
 
     @GetMapping("/home-logada")
     public String listarVagas(Model model, HttpSession session) {
-        // 1. Tenta pegar dos flash attributes primeiro
+
         if (!model.containsAttribute("sucesso") && session.getAttribute("sucesso") != null) {
             model.addAttribute("sucesso", session.getAttribute("sucesso"));
             session.removeAttribute("sucesso");

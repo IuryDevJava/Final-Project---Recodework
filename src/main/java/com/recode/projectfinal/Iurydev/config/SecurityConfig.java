@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/entrar")
                         .usernameParameter("email")
                         .passwordParameter("senha")
-                        .defaultSuccessUrl("/vagas/home-logada", true)  // ← Atualizei para a URL correta
+                        .defaultSuccessUrl("/home/user", true)
                         .failureUrl("/entrar?error=true")
                         .permitAll()
                 )

@@ -184,59 +184,71 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-/*
 // CHAT
 document.addEventListener('DOMContentLoaded', function() {
-  const chatToggle = document.getElementById('chatToggle');
-  const chatPopup = document.getElementById('chatPopup');
-  const closeChat = document.getElementById('closeChat');
-  const sendMessage = document.getElementById('sendMessage');
-  const userMessage = document.getElementById('userMessage');
-  const chatMessages = document.getElementById('chatMessages');
+    // Elementos do chat
+    const chatToggle = document.getElementById('chatToggle');
+    const chatPopup = document.getElementById('chatPopup');
+    const closeChat = document.getElementById('closeChat');
 
-  // Alternar visibilidade do chat
-  chatToggle.addEventListener('click', function(e) {
-    e.preventDefault();
-    chatPopup.style.display = chatPopup.style.display === 'flex' ? 'none' : 'flex';
-  });
+    // Configuração do WebSocket
+    const socket = new SockJS('/ws-chat');
+    const stompClient = Stomp.over(socket);
 
-  // Fechar chat
-  closeChat.addEventListener('click', function() {
-    chatPopup.style.display = 'none';
-  });
+    // Alternar visibilidade do chat
+    chatToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        chatPopup.classList.toggle('d-none');
+        chatPopup.classList.toggle('d-block');
+    });
 
-  // Enviar mensagem
-  sendMessage.addEventListener('click', function() {
-    sendMessageToChat();
-  });
+    // Fechar chat
+    closeChat.addEventListener('click', function() {
+        chatPopup.classList.add('d-none');
+        chatPopup.classList.remove('d-block');
+    });
 
-  // Enviar com Enter
-  userMessage.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      sendMessageToChat();
+    // Conexão WebSocket
+    stompClient.connect({}, function(frame) {
+        stompClient.subscribe('/topic/public', function(response) {
+            const message = JSON.parse(response.body);
+            showMessage(message.sender, message.content, 'received');
+        });
+    });
+
+    // Enviar mensagem
+    document.getElementById('sendMessage').addEventListener('click', sendMessage);
+    document.getElementById('userMessage').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+        const messageContent = document.getElementById('userMessage').value.trim();
+        if (messageContent) {
+            const chatMessage = {
+                sender: 'Você',
+                content: messageContent
+            };
+
+            stompClient.send("/app/chat.send", {}, JSON.stringify(chatMessage));
+            showMessage('Você', messageContent, 'sent');
+            document.getElementById('userMessage').value = '';
+        }
     }
-  });
 
-  function sendMessageToChat() {
-    if (userMessage.value.trim() !== '') {
-      // Adiciona mensagem do usuário
-      const userMsgDiv = document.createElement('div');
-      userMsgDiv.className = 'message sent';
-      userMsgDiv.innerHTML = `<p>${userMessage.value}</p>`;
-      chatMessages.appendChild(userMsgDiv);
+    function showMessage(sender, content, type) {
+        const chatMessages = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type} p-2 mb-2 rounded`;
+        messageDiv.innerHTML = `<p class="mb-0"><strong>${sender}:</strong> ${content}</p>`;
 
-      // Simula resposta após 1 segundo
-      setTimeout(() => {
-        const replyDiv = document.createElement('div');
-        replyDiv.className = 'message received';
-        replyDiv.innerHTML = '<p>Obrigado por sua mensagem. Nossa equipe responderá em breve.</p>';
-        chatMessages.appendChild(replyDiv);
+        if (type === 'received') {
+            messageDiv.classList.add('bg-light');
+        } else {
+            messageDiv.classList.add('bg-primary', 'text-white');
+        }
+
+        chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-      }, 1000);
-
-      userMessage.value = '';
-      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-  }
-});*/
+});
