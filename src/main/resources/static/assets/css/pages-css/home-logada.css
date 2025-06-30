@@ -521,13 +521,42 @@ i {
   border: none;
 }
 
-/* Estilos do popup do chat */
-/* Estilos específicos para o chat */
 .chat-popup {
   width: 350px;
   z-index: 1000;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   border-radius: 8px;
+}
+
+.chat-header{
+  background: linear-gradient(
+  rgba(250, 251, 255, 0.192),
+  rgba(26, 30, 37, 1)
+  );
+  border: 3px solid;
+  border-image: linear-gradient(
+  135deg,
+  rgba(255, 140, 0, 1) 0%,
+  rgba(117, 7, 135, 1) 10%,
+  rgba(228, 3, 3, 1) 36%,
+  rgba(255, 237, 0, 1) 52%,
+  rgba(0, 77, 255, 1) 68%,
+  rgba(0, 128, 38, 1) 84%
+  )
+  1;
+  color: #fff;
+  max-width: 400px;
+  width: 100%;
+}
+
+.button-enviar-chat{
+  background-color: #0900d3;
+  color: white;
+}
+
+.button-enviar-chat:hover{
+  background-color: #0900d3;
+  color: #c7d9ff;
 }
 
 .message {

@@ -6,7 +6,6 @@ setTimeout(() => {
     }
 }, 5000);
 
-
 document.addEventListener('DOMContentLoaded', function() {
     // =============================================
     // 1. Controle de Mensagens (Alertas)
@@ -68,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 badgesContainer.innerHTML = `
                         <span class="badge badge-custom tempo">${vaga.tipoContrato}</span>
                         ${vaga.lgbtqiaFriendly ?
-                          '<span class="badge badge-custom lgbt">LGBTQIA+</span>' : ''}
+                            '<span class="badge badge-custom lgbt">LGBTQIA+</span>' : ''}
                         <span class="badge badge-custom area">${vaga.area}</span>
                     `;
 
@@ -174,6 +173,190 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =============================================
+    // 6. Sistema de Chat com WebSocket e OpenAI
+    function setupChatSystem() {
+
+        // Elementos
+        const chatElements = {
+            toggle: document.getElementById('chatToggle'),
+            popup: document.getElementById('chatPopup'),
+            closeBtn: document.getElementById('closeChat'),
+            sendBtn: document.getElementById('sendMessage'),
+            input: document.getElementById('userMessage'),
+            messages: document.getElementById('chatMessages')
+        };
+
+        // Estado
+        const chatState = {
+            connected: false,
+            stompClient: null,
+            reconnectAttempts: 0,
+            maxAttempts: 5
+        };
+
+        // Auxiliares
+        const chatHelpers = {
+            showMessage: (sender, text, type) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${type} p-3 mb-2 rounded`;
+
+                // Ícones diferentes para cada tipo
+                const icon = type === 'received' ? '🌈' : '👤';
+
+                messageDiv.innerHTML = `
+                <div class="message-header d-flex align-items-center mb-1">
+                    <span class="message-icon me-2">${icon}</span>
+                    <strong class="message-sender">${sender}</strong>
+                </div>
+                <div class="message-content">${text}</div>
+            `;
+
+                // Estilos diferentes
+                if (type === 'received') {
+                    messageDiv.classList.add('bg-light', 'text-dark');
+                } else {
+                    messageDiv.classList.add('bg-light', 'text-dark');
+                }
+
+                chatElements.messages.appendChild(messageDiv);
+                chatElements.messages.scrollTop = chatElements.messages.scrollHeight;
+            },
+
+            showTyping: () => {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'typing-message p-2 mb-2';
+                typingDiv.innerHTML = `
+                <div class="typing-content d-flex align-items-center">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="ms-2">Digitando...</span>
+                </div>
+            `;
+                chatElements.messages.appendChild(typingDiv);
+                chatElements.messages.scrollTop = chatElements.messages.scrollHeight;
+            },
+
+            hideTyping: () => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+            },
+
+            setLoading: (isLoading) => {
+                chatElements.sendBtn.disabled = isLoading;
+                chatElements.sendBtn.innerHTML = isLoading
+                    ? '<span class="spinner-border spinner-border-sm"></span> Enviando...'
+                    : 'Enviar';
+            }
+        };
+
+        // Conexão WebSocket
+        const connectWebSocket = () => {
+            chatHelpers.showMessage('Sistema', 'Conectando ao chat...', 'system');
+
+            const socket = new SockJS('/ws-chat');
+            chatState.stompClient = Stomp.over(socket);
+
+            chatState.stompClient.connect({},
+                (frame) => {
+                    chatState.connected = true;
+                    chatState.reconnectAttempts = 0;
+                    chatHelpers.showMessage('Sistema', 'Conectado com sucesso!', 'system');
+
+                    // Assinar tópico
+                    chatState.stompClient.subscribe('/topic/public', (message) => {
+                        const { sender, content } = JSON.parse(message.body);
+                        chatHelpers.hideTyping();
+                        chatHelpers.showMessage(sender, content, 'received');
+                    });
+
+                    // Mensagem de boas-vindas
+                    setTimeout(() => {
+                        chatHelpers.showMessage(
+                            'Ally',
+                            'Olá! Sou o Ally, seu assistente virtual. Digite "ajuda" para ver como posso te ajudar! 😊',
+                            'received'
+                        );
+                    }, 500);
+                },
+                (error) => {
+                    chatState.connected = false;
+                    chatState.reconnectAttempts++;
+
+                    if (chatState.reconnectAttempts <= chatState.maxAttempts) {
+                        const delay = Math.min(chatState.reconnectAttempts * 3000, 10000);
+                        chatHelpers.showMessage(
+                            'Sistema',
+                            `Falha na conexão. Tentando novamente (${chatState.reconnectAttempts}/${chatState.maxAttempts})...`,
+                            'system'
+                        );
+                        setTimeout(connectWebSocket, delay);
+                    } else {
+                        chatHelpers.showMessage(
+                            'Sistema',
+                            'Não foi possível conectar. Por favor, recarregue a página.',
+                            'error'
+                        );
+                    }
+                }
+            );
+        };
+
+        // Enviar mensagem
+        const sendMessage = () => {
+            const message = chatElements.input.value.trim();
+            if (!message) return;
+
+            // Mostrar mensagem do usuário
+            chatHelpers.showMessage('Você', message, 'sent');
+            chatElements.input.value = '';
+            chatHelpers.setLoading(true);
+            chatHelpers.showTyping();
+
+            try {
+                chatState.stompClient.send(
+                    "/app/chat.send",
+                    {},
+                    JSON.stringify({ sender: 'Você', content: message })
+                );
+            } catch (e) {
+                chatHelpers.showMessage(
+                    'Sistema',
+                    'Erro ao enviar mensagem. Tentando reconectar...',
+                    'error'
+                );
+                connectWebSocket();
+            } finally {
+                setTimeout(() => chatHelpers.setLoading(false), 1000);
+            }
+        };
+
+        // Eventos
+        const setupEvents = () => {
+            chatElements.toggle?.addEventListener('click', (e) => {
+                e.preventDefault();
+                chatElements.popup.classList.toggle('d-none');
+                if (!chatState.stompClient && chatElements.popup.classList.contains('d-block')) {
+                    connectWebSocket();
+                }
+            });
+
+            chatElements.closeBtn?.addEventListener('click', () => {
+                chatElements.popup.classList.add('d-none');
+            });
+
+            chatElements.sendBtn?.addEventListener('click', sendMessage);
+            chatElements.input?.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+        };
+
+        // Inicialização
+        setupEvents();
+    }
+
+    // =============================================
     // Inicialização de todos os componentes
     // =============================================
     setupAlerts();
@@ -181,74 +364,5 @@ document.addEventListener('DOMContentLoaded', function() {
     setupApplicationForm();
     setupPhoneMask();
     checkUrlForMessages();
-});
-
-
-// CHAT
-document.addEventListener('DOMContentLoaded', function() {
-    // Elementos do chat
-    const chatToggle = document.getElementById('chatToggle');
-    const chatPopup = document.getElementById('chatPopup');
-    const closeChat = document.getElementById('closeChat');
-
-    // Configuração do WebSocket
-    const socket = new SockJS('/ws-chat');
-    const stompClient = Stomp.over(socket);
-
-    // Alternar visibilidade do chat
-    chatToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        chatPopup.classList.toggle('d-none');
-        chatPopup.classList.toggle('d-block');
-    });
-
-    // Fechar chat
-    closeChat.addEventListener('click', function() {
-        chatPopup.classList.add('d-none');
-        chatPopup.classList.remove('d-block');
-    });
-
-    // Conexão WebSocket
-    stompClient.connect({}, function(frame) {
-        stompClient.subscribe('/topic/public', function(response) {
-            const message = JSON.parse(response.body);
-            showMessage(message.sender, message.content, 'received');
-        });
-    });
-
-    // Enviar mensagem
-    document.getElementById('sendMessage').addEventListener('click', sendMessage);
-    document.getElementById('userMessage').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') sendMessage();
-    });
-
-    function sendMessage() {
-        const messageContent = document.getElementById('userMessage').value.trim();
-        if (messageContent) {
-            const chatMessage = {
-                sender: 'Você',
-                content: messageContent
-            };
-
-            stompClient.send("/app/chat.send", {}, JSON.stringify(chatMessage));
-            showMessage('Você', messageContent, 'sent');
-            document.getElementById('userMessage').value = '';
-        }
-    }
-
-    function showMessage(sender, content, type) {
-        const chatMessages = document.getElementById('chatMessages');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${type} p-2 mb-2 rounded`;
-        messageDiv.innerHTML = `<p class="mb-0"><strong>${sender}:</strong> ${content}</p>`;
-
-        if (type === 'received') {
-            messageDiv.classList.add('bg-light');
-        } else {
-            messageDiv.classList.add('bg-primary', 'text-white');
-        }
-
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
+    setupChatSystem();
 });
