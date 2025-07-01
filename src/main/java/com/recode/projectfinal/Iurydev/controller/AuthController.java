@@ -4,6 +4,7 @@ import com.recode.projectfinal.Iurydev.dto.UsuarioDTO;
 
 import com.recode.projectfinal.Iurydev.model.Usuario;
 import com.recode.projectfinal.Iurydev.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,18 +27,18 @@ public class AuthController {
 
     @GetMapping("/")
     public String mostrarIndex() {
-        return "index"; // index.html está na raiz de templates
+        return "index";
     }
 
     @GetMapping("/home")
     public String mostrarIndexAlternativo() {
-        return "index"; // Mesma página que "/"
+        return "index";
     }
 
     @GetMapping("/cadastro")
     public String mostrarPaginaCadastro(Model model) {
         model.addAttribute("usuarioDTO", UsuarioDTO.createEmpty());
-        return "pages/cadastro"; // caminho completo para a subpasta
+        return "pages/cadastro";
     }
 
     @PostMapping("/cadastro")
@@ -47,12 +48,12 @@ public class AuthController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "pages/cadastro"; // mantém o mesmo caminho para validação
+            return "pages/cadastro";
         }
 
         try {
             usuarioService.cadastrarUsuario(usuarioDTO);
-            return "redirect:/entrar?sucesso"; // redirecionamento absoluto
+            return "redirect:/entrar?sucesso";
         } catch (RuntimeException e) {
             model.addAttribute("erro", e.getMessage());
             return "pages/cadastro";
@@ -79,15 +80,23 @@ public class AuthController {
         return "pages/entrar";
     }
 
-    /*@GetMapping("/home-logada")
-    public String mostrarHomeLogada(Model model) {
+    @GetMapping("/home/user")
+    public String mostrarHomeLogada(Model model, HttpSession session) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
 
         Usuario usuario = usuarioService.buscarUsuarioPorEmail(email);
         model.addAttribute("nomeUsuario", usuario.getNome());
 
+        if (session.getAttribute("primeiroLogin") == null) {
+            model.addAttribute("mostrarBoasVindas", true);
+            session.setAttribute("primeiroLogin", "false");
+        } else {
+            model.addAttribute("mostrarBoasVindas", false);
+        }
+
         return "pages/home-logada";
-    }*/
+    }
+
 
 }
