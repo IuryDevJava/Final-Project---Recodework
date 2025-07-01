@@ -39,6 +39,10 @@ public class ChatController {
     @MessageMapping("/chat.send")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(ChatMessage message) {
+        if (message.getSender().equals("Sistema")) {
+            message.setContent("[Importante] " + message.getContent());
+        }
+
         try {
             log.info("Mensagem recebida: {}", message.getContent());
             String content = message.getContent().toLowerCase().trim();
@@ -60,14 +64,14 @@ public class ChatController {
         } catch (Exception e) {
             log.error("Erro no chat", e);
             return createResponse("""
-                ⚠️ Estou com dificuldades técnicas no momento. 
-                
-                Você pode:
-                1. Tentar novamente em alguns instantes
-                2. Contatar nosso suporte:
-                   📧 atendimento@recode.org.br
-                   📞 (21) 2345-6789
-                3. Acessar nosso site: https://recode.org.br/""");
+                    ⚠️ Estou com dificuldades técnicas no momento. 
+                    
+                    Você pode:
+                    1. Tentar novamente em alguns instantes
+                    2. Contatar nosso suporte:
+                       📧 atendimento@recode.org.br
+                       📞 (21) 2345-6789
+                    3. Acessar nosso site: https://recode.org.br/""");
         }
     }
 

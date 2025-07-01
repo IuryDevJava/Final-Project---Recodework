@@ -20,6 +20,10 @@ public class Candidatura {
     @JoinColumn(name = "vaga_id")
     private Vaga vaga;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     private String nomeCandidato;
     private String emailCandidato;
     private String telefoneCandidato;

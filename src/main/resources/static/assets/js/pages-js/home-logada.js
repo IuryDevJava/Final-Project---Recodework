@@ -1,12 +1,12 @@
-/*BOAS-VINDAS MESSAGEM*/
-setTimeout(() => {
-    const alerta = document.getElementById('boas-vindas');
-    if (alerta) {
-        alerta.style.display = 'none';
-    }
-}, 5000);
-
 document.addEventListener('DOMContentLoaded', function() {
+    // Fecha mensagem de boas-vindas após 5 segundos
+    setTimeout(() => {
+        const alerta = document.getElementById('boas-vindas');
+        if (alerta) {
+            alerta.style.display = 'none';
+        }
+    }, 5000);
+
     // =============================================
     // 1. Controle de Mensagens (Alertas)
     // =============================================
@@ -173,10 +173,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =============================================
-    // 6. Sistema de Chat com WebSocket e OpenAI
+    // 6. Sistema de Chat com WebSocket e Toasts
+    // =============================================
     function setupChatSystem() {
-
-        // Elementos
+        // Elementos do DOM
         const chatElements = {
             toggle: document.getElementById('chatToggle'),
             popup: document.getElementById('chatPopup'),
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
             messages: document.getElementById('chatMessages')
         };
 
-        // Estado
+        // Estado do chat
         const chatState = {
             connected: false,
             stompClient: null,
@@ -194,30 +194,22 @@ document.addEventListener('DOMContentLoaded', function() {
             maxAttempts: 5
         };
 
-        // Auxiliares
+        // Funções auxiliares
         const chatHelpers = {
             showMessage: (sender, text, type) => {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${type} p-3 mb-2 rounded`;
 
-                // Ícones diferentes para cada tipo
                 const icon = type === 'received' ? '🌈' : '👤';
-
                 messageDiv.innerHTML = `
-                <div class="message-header d-flex align-items-center mb-1">
-                    <span class="message-icon me-2">${icon}</span>
-                    <strong class="message-sender">${sender}</strong>
-                </div>
-                <div class="message-content">${text}</div>
-            `;
+                    <div class="message-header d-flex align-items-center mb-1">
+                        <span class="message-icon me-2">${icon}</span>
+                        <strong class="message-sender">${sender}</strong>
+                    </div>
+                    <div class="message-content">${text}</div>
+                `;
 
-                // Estilos diferentes
-                if (type === 'received') {
-                    messageDiv.classList.add('bg-light', 'text-dark');
-                } else {
-                    messageDiv.classList.add('bg-light', 'text-dark');
-                }
-
+                messageDiv.classList.add(type === 'received' ? 'bg-light' : 'bg-light', 'text-dark');
                 chatElements.messages.appendChild(messageDiv);
                 chatElements.messages.scrollTop = chatElements.messages.scrollHeight;
             },
@@ -227,13 +219,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 typingDiv.id = 'typing-indicator';
                 typingDiv.className = 'typing-message p-2 mb-2';
                 typingDiv.innerHTML = `
-                <div class="typing-content d-flex align-items-center">
-                    <div class="typing-dots">
-                        <span></span><span></span><span></span>
+                    <div class="typing-content d-flex align-items-center">
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="ms-2">Digitando...</span>
                     </div>
-                    <span class="ms-2">Digitando...</span>
-                </div>
-            `;
+                `;
                 chatElements.messages.appendChild(typingDiv);
                 chatElements.messages.scrollTop = chatElements.messages.scrollHeight;
             },
@@ -251,10 +243,71 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
+        // Função para mostrar toasts
+        function showNewMessageToast(message) {
+            // Remove toasts anteriores
+            document.querySelectorAll('.chat-notification-toast').forEach(toast => {
+                toast.remove();
+            });
+
+            // Cria novo toast
+            const toast = document.createElement('div');
+            toast.className = 'chat-notification-toast';
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'polite');
+            toast.innerHTML = `
+                <span>${message.length > 50 ? 'Você tem uma nova mensagem' : message}</span>
+                <button class="toast-close-btn" aria-label="Fechar">×</button>
+            `;
+
+            // Posicionamento preciso relativo ao botão do chat
+            const chatBtn = document.getElementById('chatToggle');
+            if (chatBtn) {
+                const btnRect = chatBtn.getBoundingClientRect();
+                toast.style.bottom = `${window.innerHeight - btnRect.top + 15}px`;
+                toast.style.right = `${window.innerWidth - btnRect.right - 10}px`;
+            }
+
+            document.body.appendChild(toast);
+
+            // Fechamento automático após 5 segundos
+            const autoClose = setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+
+            // Fechar ao clicar no botão
+            toast.querySelector('.toast-close-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                clearTimeout(autoClose);
+                toast.remove();
+            });
+
+            // Abrir chat ao clicar no toast
+            toast.addEventListener('click', () => {
+                clearTimeout(autoClose);
+                toast.remove();
+                chatElements.popup.classList.remove('d-none');
+                document.getElementById('unreadBadge').classList.add('d-none');
+            });
+        }
+
+        function updateUnreadBadge() {
+            const badge = document.getElementById('unreadBadge');
+            if (badge) {
+                badge.classList.remove('d-none');
+            }
+        }
+
+        function resetUnreadBadge() {
+            const badge = document.getElementById('unreadBadge');
+            if (badge) {
+                badge.classList.add('d-none');
+            }
+        }
+
         // Conexão WebSocket
         const connectWebSocket = () => {
-            chatHelpers.showMessage('Sistema', 'Conectando ao chat...', 'system');
-
             const socket = new SockJS('/ws-chat');
             chatState.stompClient = Stomp.over(socket);
 
@@ -262,42 +315,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 (frame) => {
                     chatState.connected = true;
                     chatState.reconnectAttempts = 0;
-                    chatHelpers.showMessage('Sistema', 'Conectado com sucesso!', 'system');
 
-                    // Assinar tópico
+                    // Subscreve para receber mensagens
                     chatState.stompClient.subscribe('/topic/public', (message) => {
                         const { sender, content } = JSON.parse(message.body);
                         chatHelpers.hideTyping();
                         chatHelpers.showMessage(sender, content, 'received');
+
+                        // Mostra toast se chat estiver fechado
+                        if (chatElements.popup.classList.contains('d-none')) {
+                            showNewMessageToast(content);
+                            updateUnreadBadge();
+                        }
                     });
 
-                    // Mensagem de boas-vindas
-                    setTimeout(() => {
+                    // Mensagem inicial apenas quando o chat é aberto
+                    if (!chatElements.popup.classList.contains('d-none')) {
                         chatHelpers.showMessage(
                             'Ally',
-                            'Olá! Sou o Ally, seu assistente virtual. Digite "ajuda" para ver como posso te ajudar! 😊',
+                            'Olá! Eu sou o Ally, seu assistente virtual. Como posso te ajudar hoje? 😊',
                             'received'
                         );
-                    }, 500);
+                    }
                 },
                 (error) => {
                     chatState.connected = false;
-                    chatState.reconnectAttempts++;
-
-                    if (chatState.reconnectAttempts <= chatState.maxAttempts) {
-                        const delay = Math.min(chatState.reconnectAttempts * 3000, 10000);
-                        chatHelpers.showMessage(
-                            'Sistema',
-                            `Falha na conexão. Tentando novamente (${chatState.reconnectAttempts}/${chatState.maxAttempts})...`,
-                            'system'
-                        );
-                        setTimeout(connectWebSocket, delay);
-                    } else {
-                        chatHelpers.showMessage(
-                            'Sistema',
-                            'Não foi possível conectar. Por favor, recarregue a página.',
-                            'error'
-                        );
+                    if (chatState.reconnectAttempts < chatState.maxAttempts) {
+                        setTimeout(connectWebSocket, 3000);
+                        chatState.reconnectAttempts++;
                     }
                 }
             );
@@ -332,13 +377,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        // Eventos
+        // Configuração de eventos
         const setupEvents = () => {
             chatElements.toggle?.addEventListener('click', (e) => {
                 e.preventDefault();
                 chatElements.popup.classList.toggle('d-none');
-                if (!chatState.stompClient && chatElements.popup.classList.contains('d-block')) {
+
+                if (!chatState.stompClient && !chatElements.popup.classList.contains('d-none')) {
                     connectWebSocket();
+                }
+
+                // Resetar badge quando o chat é aberto
+                if (!chatElements.popup.classList.contains('d-none')) {
+                    resetUnreadBadge();
                 }
             });
 
@@ -352,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         };
 
-        // Inicialização
+        // Inicialização do sistema
         setupEvents();
     }
 

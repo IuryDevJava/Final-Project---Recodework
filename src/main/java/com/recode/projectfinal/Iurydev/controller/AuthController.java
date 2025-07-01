@@ -98,5 +98,4 @@ public class AuthController {
         return "pages/home-logada";
     }
 
-
 }

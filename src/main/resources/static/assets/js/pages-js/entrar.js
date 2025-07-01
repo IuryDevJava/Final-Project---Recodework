@@ -2,13 +2,12 @@ function toggleSenha(inputId, iconId) {
     const senhaInput = document.getElementById(inputId);
     const icon = document.getElementById(iconId);
 
-    if (senhaInput.type === 'password') {
-        senhaInput.type = 'text';
-        icon.classList.replace('fa-eye', 'fa-eye-slash');
-    } else {
-        senhaInput.type = 'password';
-        icon.classList.replace('fa-eye-slash', 'fa-eye');
-    }
+    const senhaVisivel = senhaInput.type === 'text';
+
+    senhaInput.type = senhaVisivel ? 'password' : 'text';
+
+    icon.classList.remove(senhaVisivel ? 'fa-eye' : 'fa-eye-slash');
+    icon.classList.add(senhaVisivel ? 'fa-eye-slash' : 'fa-eye');
 }
 
 

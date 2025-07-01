@@ -2,8 +2,10 @@ package com.recode.projectfinal.Iurydev.controller;
 
 import com.recode.projectfinal.Iurydev.dto.CandidaturaDTO;
 import com.recode.projectfinal.Iurydev.model.Candidatura;
+import com.recode.projectfinal.Iurydev.model.Usuario;
 import com.recode.projectfinal.Iurydev.model.Vaga;
 import com.recode.projectfinal.Iurydev.repository.CandidaturaRepository;
+import com.recode.projectfinal.Iurydev.repository.UsuarioRepository;
 import com.recode.projectfinal.Iurydev.repository.VagaRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -28,13 +30,16 @@ public class VagaController {
 
     private final VagaRepository vagaRepository;
     private final CandidaturaRepository candidaturaRepository;
+    private final UsuarioRepository usuarioRepository;
     private static final String UPLOAD_DIR = "uploads/curriculos/";
 
     @Autowired
     public VagaController(VagaRepository vagaRepository,
-                          CandidaturaRepository candidaturaRepository) {
+                          CandidaturaRepository candidaturaRepository,
+                          UsuarioRepository usuarioRepository) {
         this.vagaRepository = vagaRepository;
         this.candidaturaRepository = candidaturaRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @GetMapping("/home-logada")
@@ -93,9 +98,17 @@ public class VagaController {
             Vaga vaga = vagaRepository.findById(candidaturaDTO.getVagaId())
                     .orElseThrow(() -> new IllegalArgumentException("Vaga não encontrada"));
 
+            // Buscar o usuário logado
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String emailUsuario = auth.getName();
+
+            Usuario usuario = usuarioRepository.findByEmail(emailUsuario)
+                    .orElseThrow(() -> new IllegalArgumentException("Usuário logado não encontrado"));
+
             // Criar e salvar candidatura
             Candidatura candidatura = new Candidatura();
             candidatura.setVaga(vaga);
+            candidatura.setUsuario(usuario);
             candidatura.setNomeCandidato(candidaturaDTO.getNomeCandidato());
             candidatura.setEmailCandidato(candidaturaDTO.getEmailCandidato());
             candidatura.setTelefoneCandidato(candidaturaDTO.getTelefoneCandidato());
