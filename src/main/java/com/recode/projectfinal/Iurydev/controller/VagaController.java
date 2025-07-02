@@ -87,25 +87,21 @@ public class VagaController {
                              HttpServletRequest request) {
 
         try {
-            // Validação do arquivo
             if (curriculo.isEmpty()) {
                 throw new IllegalArgumentException("O currículo é obrigatório");
             }
 
             String curriculoPath = salvarCurriculo(curriculo);
 
-            // Buscar a vaga
             Vaga vaga = vagaRepository.findById(candidaturaDTO.getVagaId())
                     .orElseThrow(() -> new IllegalArgumentException("Vaga não encontrada"));
 
-            // Buscar o usuário logado
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String emailUsuario = auth.getName();
 
             Usuario usuario = usuarioRepository.findByEmail(emailUsuario)
                     .orElseThrow(() -> new IllegalArgumentException("Usuário logado não encontrado"));
 
-            // Criar e salvar candidatura
             Candidatura candidatura = new Candidatura();
             candidatura.setVaga(vaga);
             candidatura.setUsuario(usuario);
@@ -131,13 +127,11 @@ public class VagaController {
     }
 
     private String salvarCurriculo(MultipartFile curriculo) throws IOException {
-        // Criar diretório se não existir
         Path uploadPath = Paths.get(UPLOAD_DIR);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        // Validar tipo de arquivo
         String originalFilename = curriculo.getOriginalFilename();
         if (originalFilename == null ||
                 (!originalFilename.endsWith(".pdf") && !originalFilename.endsWith(".docx") && !originalFilename.endsWith(".doc"))) {

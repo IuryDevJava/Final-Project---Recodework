@@ -21,22 +21,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // Configuração CORS
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                // Desabilitar CSRF para endpoints WebSocket
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/ws-chat/**")
                 )
 
-                // Configuração de sessão
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 )
 
-                // Autorizações
                 .authorizeHttpRequests(auth -> auth
-                        // Permite acesso público
                         .requestMatchers(
                                 "/", "/home", "/cadastro", "/entrar",
                                 "/assets/**", "/vagas/**", "/ws-chat/**"
@@ -46,7 +41,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                // Configuração do formulário de login
                 .formLogin(form -> form
                         .loginPage("/entrar")
                         .loginProcessingUrl("/entrar")
@@ -57,7 +51,6 @@ public class SecurityConfig {
                         .permitAll()
                 )
 
-                // Configuração de logout
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")

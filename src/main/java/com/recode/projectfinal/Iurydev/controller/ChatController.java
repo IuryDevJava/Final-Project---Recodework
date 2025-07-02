@@ -47,17 +47,14 @@ public class ChatController {
             log.info("Mensagem recebida: {}", message.getContent());
             String content = message.getContent().toLowerCase().trim();
 
-            // Respostas para saudações
             if (GREETINGS.containsKey(content)) {
                 return createResponse(GREETINGS.get(content));
             }
 
-            // Respostas para despedidas
             if (FAREWELLS.containsKey(content)) {
                 return createResponse(FAREWELLS.get(content));
             }
 
-            // Processa a mensagem
             String response = openAIService.getChatResponse(message.getContent());
             return createResponse(response);
 

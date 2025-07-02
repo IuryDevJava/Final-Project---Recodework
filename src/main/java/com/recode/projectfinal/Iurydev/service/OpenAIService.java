@@ -58,24 +58,20 @@ public class OpenAIService {
     public String getChatResponse(String userMessage) {
         String lowerMessage = userMessage.toLowerCase().trim();
 
-        // Verifica no cache primeiro
         if (responseCache.containsKey(lowerMessage)) {
             return responseCache.get(lowerMessage);
         }
 
-        // 1. Verifica respostas exatas
         if (RESPONSE_MAP.containsKey(lowerMessage)) {
             return cacheAndReturn(lowerMessage, RESPONSE_MAP.get(lowerMessage));
         }
 
-        // 2. Verifica palavras-chave
         for (Map.Entry<String, String> entry : KEYWORD_RESPONSES.entrySet()) {
             if (lowerMessage.contains(entry.getKey())) {
                 return cacheAndReturn(lowerMessage, entry.getValue());
             }
         }
 
-        // 3. Se API está habilitada e tem chave, tenta OpenAI
         if (apiEnabled && apiKey != null && !apiKey.isBlank()) {
             try {
                 String apiResponse = tryOpenAI(userMessage);
@@ -86,7 +82,6 @@ public class OpenAIService {
             }
         }
 
-        // 4. Fallback genérico
         return cacheAndReturn(lowerMessage, getDefaultResponse(lowerMessage));
     }
 
@@ -95,7 +90,6 @@ public class OpenAIService {
         return value;
     }
 
-    // Métodos auxiliares para construir respostas organizadas
     private static String getHelpResponse() {
         return """
             🌈 Como posso te ajudar? Escolha uma opção:
