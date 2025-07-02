@@ -4,6 +4,14 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+docker-compose.yml
+
+src/main/resources/application-docker.properties
+
+uploads/
+
+
+
 
 
 ### STS ###
