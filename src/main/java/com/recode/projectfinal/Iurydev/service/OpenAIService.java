@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class OpenAIService {
 
-    @Value("${openai.api.key:}")
+    @Value("${OPENAI_API_KEY}")
     private String apiKey;
 
     private boolean apiEnabled = true;
