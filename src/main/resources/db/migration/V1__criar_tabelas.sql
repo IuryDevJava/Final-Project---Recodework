@@ -9,8 +9,8 @@ CREATE TABLE tb_usuarios (
 
 CREATE TABLE vaga (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255),
-    empresa VARCHAR(255),
+    titulo VARCHAR(255) NOT NULL,
+    empresa VARCHAR(255) NOT NULL,
     localizacao VARCHAR(255),
     tipo_contrato VARCHAR(255),
     descricao TEXT,
@@ -20,12 +20,12 @@ CREATE TABLE vaga (
 
 CREATE TABLE candidatura (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    vaga_id BIGINT,
-    usuario_id BIGINT,
+    vaga_id BIGINT NOT NULL,
+    usuario_id BIGINT NOT NULL,
     nome_candidato VARCHAR(255),
     email_candidato VARCHAR(255),
     telefone_candidato VARCHAR(50),
-    curriculo_path VARCHAR(255),
+    curriculo_path VARCHAR(255) NOT NULL,
     mensagem TEXT,
     data_candidatura DATETIME DEFAULT CURRENT_TIMESTAMP,
 
