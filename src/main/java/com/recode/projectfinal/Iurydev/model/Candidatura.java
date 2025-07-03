@@ -24,12 +24,22 @@ public class Candidatura {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @Column(name = "nome_candidato")
     private String nomeCandidato;
+
+    @Column(name = "email_candidato")
     private String emailCandidato;
+
+    @Column(name = "telefone_candidato")
     private String telefoneCandidato;
+
+    @Column(name = "curriculo_path", nullable = false)
     private String curriculoPath;
+
+    @Column(name = "mensagem", columnDefinition = "TEXT")
     private String mensagem;
 
+    @Column(name = "data_candidatura", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime dataCandidatura;
 
