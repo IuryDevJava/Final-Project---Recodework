@@ -17,11 +17,11 @@ public class Candidatura {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "vaga_id")
+    @JoinColumn(name = "id_vaga")
     private Vaga vaga;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @Column(name = "nome_candidato")

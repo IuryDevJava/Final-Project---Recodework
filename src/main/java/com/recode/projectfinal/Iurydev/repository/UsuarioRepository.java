@@ -1,5 +1,7 @@
 package com.recode.projectfinal.Iurydev.repository;
 
+
+
 import com.recode.projectfinal.Iurydev.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 

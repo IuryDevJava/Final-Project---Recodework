@@ -56,7 +56,6 @@ public class VagaController {
 
         model.addAttribute("vagas", vagaRepository.findAll());
 
-        // Adiciona o nome do usuário (opcional)
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getName().equals("anonymousUser")) {
             model.addAttribute("nomeUsuario", auth.getName());
