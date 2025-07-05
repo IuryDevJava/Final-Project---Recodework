@@ -408,6 +408,89 @@
    
 ---
 
+# 🚀 Deploy e Configuração da Aplicação
+
 [![Deploy](https://img.shields.io/badge/deploy-production-2ea44f?style=for-the-badge&logo=render&logoColor=white)](https://render.com/)
-   
-   
+
+---
+
+## ⚙️ Exemplo do `application-prod.properties`
+
+Arquivo completo localizado em: `src/main/resources/application-prod.properties`
+
+```properties
+spring.datasource.url=jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+spring.datasource.username=${MYSQLUSER}
+spring.datasource.password=${MYSQLPASSWORD}
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.sql.init.mode=always
+spring.sql.init.continue-on-error=true
+spring.jpa.defer-datasource-initialization=true
+spring.jpa.properties.hibernate.hbm2ddl.create-constraints=true
+
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.check-template-location=true
+
+spring.servlet.multipart.max-file-size=5MB
+spring.servlet.multipart.max-request-size=5MB
+
+openai.api.key=${openai.api.key}
+openai.api.url=https://api.openai.com/v1/chat/completions
+openai.api.model=gpt-3.5-turbo
+openai.api.temperature=0.7
+openai.api.max-tokens=500
+
+spring.mvc.async.request-timeout=60000
+
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+spring.jackson.time-zone=America/Sao_Paulo
+
+spring.datasource.hikari.connection-timeout=20000
+spring.datasource.hikari.maximum-pool-size=5
+
+logging.level.root=INFO
+logging.level.org.springframework.web=INFO
+logging.level.com.yourpackage=DEBUG
+
+
+## 🔁 Atualize o `application.properties`
+
+Para ativar o modo produção, configure:
+
+```properties
+spring.profiles.active=prod
+
+
+🌐 Conectando com Railway e Render
+🌐 2. Configure o Banco de Dados no Railway
+Acesse Railway.
+
+Crie um novo projeto e selecione o banco MySQL.
+
+Copie as variáveis de ambiente geradas (host, usuário, senha, etc).
+
+🚀 3. Faça o Deploy da Aplicação no Render
+Acesse Render.
+
+Crie um novo Web Service.
+
+Conecte seu repositório GitHub.
+
+Adicione as seguintes variáveis de ambiente no Render(Environment):
+
+| Variável         | Valor                        |
+| ---------------- | ---------------------------- |
+| `MYSQLDATABASE`  | railway                      |
+| `MYSQLHOST`      | mainline.proxy.rlwy.net      |
+| `MYSQLPORT`      | 21465                        |
+| `MYSQLUSER`      | root                         |
+| `MYSQLPASSWORD`  | \*\*\*\*\*\*\*\*\*\*\*\*\*\* |
+| `openai.api.key` | sk-... (sua chave da OpenAI) |
+
