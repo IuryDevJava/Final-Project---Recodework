@@ -418,7 +418,7 @@
 
 Arquivo completo localizado em: `src/main/resources/application-prod.properties`
 
-```properties
+```
 spring.datasource.url=jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
 spring.datasource.username=${MYSQLUSER}
 spring.datasource.password=${MYSQLPASSWORD}
@@ -458,23 +458,22 @@ spring.datasource.hikari.maximum-pool-size=5
 logging.level.root=INFO
 logging.level.org.springframework.web=INFO
 logging.level.com.yourpackage=DEBUG
+```
 
-
-## 🔁 Atualize o `application.properties`
+## 🔁 Atualize o application.properties
 
 Para ativar o modo produção, configure:
-
-```properties
+```
 spring.profiles.active=prod
-
-
+```
+---
 🌐 Conectando com Railway e Render
 🌐 2. Configure o Banco de Dados no Railway
 Acesse Railway.
 
-Crie um novo projeto e selecione o banco MySQL.
+Crie um novo projeto e selecione o banco MySQL e iniciar deploy.
 
-Copie as variáveis de ambiente geradas (host, usuário, senha, etc).
+Copie as variáveis de ambiente geradas (database, host, port, usuário, senha).
 
 🚀 3. Faça o Deploy da Aplicação no Render
 Acesse Render.
@@ -483,14 +482,16 @@ Crie um novo Web Service.
 
 Conecte seu repositório GitHub.
 
-Adicione as seguintes variáveis de ambiente no Render(Environment):
+Adicione as seguintes variáveis do Railway no Render(Environment):
 
-| Variável         | Valor                        |
-| ---------------- | ---------------------------- |
-| `MYSQLDATABASE`  | railway                      |
-| `MYSQLHOST`      | mainline.proxy.rlwy.net      |
-| `MYSQLPORT`      | 21465                        |
-| `MYSQLUSER`      | root                         |
-| `MYSQLPASSWORD`  | \*\*\*\*\*\*\*\*\*\*\*\*\*\* |
-| `openai.api.key` | sk-... (sua chave da OpenAI) |
-
+---
+```
+| Variável           | Valor                                                                                 |
+|-----------------   |---------------------------------------------------------------------------------------|
+| **MYSQLDATABASE**  | railway                                                                               |
+| **MYSQLHOST**      | mainline.proxy.rlwy.net                                                               |
+| **MYSQLPORT**      | 21465                                                                                 |
+| **MYSQLUSER**      | root                                                                                  |
+| **MYSQLPASSWORD**  | \*\*\*\*\*\*\*\*\*\*\*\*\*\*                                                          |
+| **MYSQLPASSWORD**  | sk-... (sua chave da OpenAI)                                                          |
+```
