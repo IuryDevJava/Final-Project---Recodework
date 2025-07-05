@@ -23,15 +23,15 @@ public class UsuarioService implements UserDetailsService {
 
     public Usuario cadastrarUsuario(UsuarioDTO usuarioDTO) {
         if (usuarioRepository.existsByEmail(usuarioDTO.email())) {
-            throw new RuntimeException("E-mail já cadastrado");
+            throw new IllegalArgumentException("E-mail já cadastrado");
         }
 
         if (usuarioRepository.existsByCpf(usuarioDTO.cpf())) {
-            throw new RuntimeException("CPF já cadastrado");
+            throw new IllegalArgumentException("CPF já cadastrado");
         }
 
         if (usuarioRepository.existsByCelular(usuarioDTO.celular())) {
-            throw new RuntimeException("Celular já cadastrado");
+            throw new IllegalArgumentException("Celular já cadastrado");
         }
 
         Usuario usuario = new Usuario();

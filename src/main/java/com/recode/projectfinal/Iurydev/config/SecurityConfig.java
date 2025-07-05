@@ -36,8 +36,6 @@ public class SecurityConfig {
                                 "/", "/home", "/cadastro", "/entrar",
                                 "/assets/**", "/vagas/**", "/ws-chat/**"
                         ).permitAll()
-
-                        // Todas outras requisições exigem autenticação
                         .anyRequest().authenticated()
                 )
 

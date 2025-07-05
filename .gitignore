@@ -10,6 +10,8 @@ src/main/resources/application-docker.properties
 
 uploads/curriculos/
 
+src/main/resources/application-dev.properties
+
 
 
 
