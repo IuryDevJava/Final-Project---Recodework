@@ -630,8 +630,6 @@ Conecte seu repositório GitHub.
 
 ---
 
----
-
 ## 📌 Conclusão
 
 O **Recodework** nasceu com o propósito de ser um espaço **seguro, inclusivo e transformador** para a comunidade **LGBTQIA+**.  

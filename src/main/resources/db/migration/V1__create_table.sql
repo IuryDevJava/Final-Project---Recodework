@@ -1,4 +1,4 @@
-CREATE TABLE usuarios (
+CREATE TABLE usuario (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -20,8 +20,8 @@ CREATE TABLE vaga (
 
 CREATE TABLE candidatura (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    vaga_id BIGINT NOT NULL,
-    usuario_id BIGINT NOT NULL,
+    id_vaga BIGINT NOT NULL,
+    id_usuario BIGINT NOT NULL,
     nome_candidato VARCHAR(255),
     email_candidato VARCHAR(255),
     telefone_candidato VARCHAR(50),
@@ -29,6 +29,6 @@ CREATE TABLE candidatura (
     mensagem TEXT,
     data_candidatura DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_candidatura_vaga FOREIGN KEY (vaga_id) REFERENCES vaga(id),
-    CONSTRAINT fk_candidatura_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+    CONSTRAINT fk_candidatura_vaga FOREIGN KEY (id_vaga) REFERENCES vaga(id),
+    CONSTRAINT fk_candidatura_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
