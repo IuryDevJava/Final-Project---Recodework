@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta
             name="description"
             content="Login Plataforma de networking e capacitação para profissionais LGBTQIA+"
@@ -219,7 +220,7 @@
         <div class="row align-items-center">
             <div class="col-md-6 home-tablet-text mb-4 mb-md-0">
                 <div class="cadastro-box">
-                    <h4 class="mb-4 text-dark">Faça o seu cadastro</h4>
+                    <h4 class="mb-4 text-white fw-bolder">Faça o seu cadastro</h4>
 
                     <form th:action="@{/cadastro}" th:object="${usuarioDTO}" method="post">
                         <div class="mb-3">
@@ -319,7 +320,7 @@
         <div class="row gap-3">
             <div class="col-12 order-1">
                 <div class="cadastro-box">
-                    <h4>Faça o seu cadastro</h4>
+                    <h4 class="text-white fw-bold mb-4">Faça o seu cadastro</h4>
 
                     <!-- Formulário Mobile -->
                     <form th:action="@{/cadastro}" th:object="${usuarioDTO}" method="post">

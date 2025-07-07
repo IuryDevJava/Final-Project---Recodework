@@ -63,7 +63,7 @@ body {
    COMPONENTES GLOBAIS
    ===================== */
 .nav-link:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
   transition: ease-in-out 0.5s;
 }
 
@@ -82,7 +82,7 @@ body {
 }
 
 .btn-enter:hover {
-  background-color: rgb(167, 131, 136);
+  background-color: rgba(0, 27, 112, 0.411);
   color: white;
   transition: ease-in-out 0.9s;
 }
@@ -96,8 +96,8 @@ body {
 }
 
 .btn-register:hover {
-  background-color: rgb(88, 37, 67);
-  color: white;
+  background-color: rgba(0, 12, 97, 0.849);
+  color: var(--cor-branco);
 }
 
 /* =====================
@@ -302,14 +302,26 @@ body {
    MEDIA QUERIES
    ===================== */
 @media (max-width: 768px) {
+  .home-mobile {
+    background: linear-gradient(
+    rgba(0, 8, 74, 1),
+    rgba(29, 49, 161, 0)
+    );
+  }
+
   .home-mobile-img img {
     width: 100%;
-    border-radius: var(--borda-arredondada);
+
   }
 
   .home-section {
     background-color: var(--cor-fundo-claro);
     color: var(--cor-texto);
+  }
+
+  .home-mobile-text{
+    color: white;
+    font-weight: 400;
   }
 
   .title-name-footer {
@@ -322,7 +334,6 @@ body {
     font-weight: 700;
     margin-top: -0.6rem;
 
-    /* Garantir que o gradiente seja centralizado e consistente */
     background-size: 55%;
     background-position: center;
     background-repeat: no-repeat;
@@ -350,10 +361,21 @@ body {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
+  .home-tablet {
+    background: linear-gradient(to right,
+    rgba(94, 0, 90, 1),
+    rgba(255, 255, 255, 1)
+    );
+  }
+
   .home-tablet img {
     height: 400px;
     width: 450px;
-    border-radius: var(--borda-arredondada);
+  }
+
+  .home-tablet-text{
+    color: white;
+    font-weight: 400;
   }
 
   .footer-brand-col {
@@ -365,8 +387,6 @@ body {
 @media (min-width: 992px) and (max-width: 1199px) {
   .footer-class .row {
     --bs-gutter-x: 1.5rem;
-    /*margin-right: calc(-0.5 * var(--bs-gutter-x));
-    margin-left: calc(-0.5 * var(--bs-gutter-x));*/
   }
 
   .footer-class .col-lg-8 {

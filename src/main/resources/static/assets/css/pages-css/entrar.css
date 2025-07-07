@@ -76,7 +76,7 @@ body {
 }
 
 .btn-enter:hover {
-  background-color: rgb(167, 131, 136);
+  background-color: rgba(0, 27, 112, 0.411);
   color: white;
   transition: ease-in-out 0.9s;
 }
@@ -90,8 +90,8 @@ body {
 }
 
 .btn-register:hover {
-   background-color: rgb(88, 37, 67);
-   color: white;
+  background-color: rgba(0, 12, 97, 0.849);
+  color: var(--cor-branco);
 }
 
 .custom-alert {
@@ -298,8 +298,8 @@ body {
 @media (max-width: 768px) {
   .home-mobile {
     background: linear-gradient(
-      rgba(250, 251, 255, 0.192),
-      rgba(45, 47, 59, 1)
+      rgba(51, 53, 66, 1),
+      rgba(255, 255, 255, 1)
     );
   }
 
@@ -378,12 +378,12 @@ body {
 @media (min-width: 769px) and (max-width: 1024px) {
   .home-tablet {
     background: linear-gradient(
-      rgba(250, 251, 255, 0.192),
-      rgba(45, 47, 59, 1)
+      rgba(51, 53, 66, 1),
+      rgba(255, 255, 255, 1)
     );
   }
   .home-tablet img {
-    height: 402px;
+    height: 411px;
   }
 
   .login-box {
@@ -415,8 +415,6 @@ body {
 @media (min-width: 992px) and (max-width: 1199px) {
   .footer-class .row {
     --bs-gutter-x: 1.5rem;
-    /*margin-right: calc(-0.5 * var(--bs-gutter-x));
-    margin-left: calc(-0.5 * var(--bs-gutter-x));*/
   }
 
   .footer-class .col-lg-8 {
