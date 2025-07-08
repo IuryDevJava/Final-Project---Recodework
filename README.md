@@ -1,7 +1,7 @@
 # Recodework - Plataforma LGBTQIA+ para Vagas, Cursos e Apoio Psicológico  
 
 [![Licença](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
-[![Status](https://img.shields.io/badge/status-em%20produção-brightgreen)](https://github.com/IuryDevJava/Final-Project---Recodework)
+[![Status](https://img.shields.io/badge/status-%20finalizado-brightgreen)](https://github.com/IuryDevJava/Final-Project---Recodework)
 
 **Plataforma exclusiva para a comunidade LGBTQIA+**, integrando:  
 ✅ **Vagas de emprego inclusivas**  
