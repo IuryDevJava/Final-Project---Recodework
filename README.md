@@ -6,7 +6,9 @@
 **Plataforma exclusiva para a comunidade LGBTQIA+**, integrando:  
 ✅ **Vagas de emprego inclusivas**  
 ✅ **Cursos gratuitos de capacitação**  
-✅ **Apoio psicológico seguro e acolhedor**  
+✅ **Apoio psicológico seguro e acolhedor**
+-
+**Link do projeto**: https://final-project-recodework-7r6w.onrender.com/
 
 ---
 
