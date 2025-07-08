@@ -11,7 +11,7 @@
 
     <title>Cadastro</title>
 
-    <link rel="shortcut icon" href="/assets/images/Logo.png" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{/assets/images/Logo.png}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -42,15 +42,18 @@
 
     <!-- CSS -->
     <link rel="stylesheet" th:href="@{/assets/css/pages-css/cadastro.css}">
+
+    <link rel="preload" as="image" th:href="@{/assets/images/home-lgbtqia.webp}" />
 </head>
 
 <body>
 <!-- NAVBAR py-3 -->
 <nav class="navbar m-0 p-0 py-4 navbar-expand-lg bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/home}">
             <img th:src="@{/assets/images/Logo.png}"
                  alt="Logo da Recodework"
+                 loading="lazy"
                  class="rounded-circle"
                  width="50"
                  height="50" style="background-color: rgba(32, 32, 32, 0.178)"
@@ -93,7 +96,7 @@
                 <li class="nav-item">
                     <a
                             class="nav-link text-dark"
-                            th:href="@{#contato}"
+                            href="#contato"
                             aria-current="page"
                     >Contato</a
                     >
@@ -196,6 +199,9 @@
                                 <i id="icon-desktop" class="fa fa-eye-slash"></i>
                             </button>
                         </div>
+                        <div class="form-text mb-0 p-0 text-white opacity-25">
+                            Sua senha deve conter no mínimo 8 caracteres
+                        </div>
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('senha')}">
                             <span th:errors="*{senha}"></span>
                         </div>
@@ -287,6 +293,9 @@
                                     <i id="icon-tablet" class="fa fa-eye-slash"></i>
                                 </button>
                             </div>
+                            <div class="form-text mb-0 p-0 text-black opacity-25">
+                                Sua senha deve conter no mínimo 8 caracteres
+                            </div>
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('senha')}">
                                 <span th:errors="*{senha}"></span>
                             </div>
@@ -304,7 +313,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <img th:src="@{/assets/images/home-lgbtqia.jpg}"
+                <img th:src="@{/assets/images/home-lgbtqia.webp}"
                      alt="Banner ilustrativo Recodework"
                      class="img-fluid shadow"
                      loading="lazy"
@@ -394,6 +403,9 @@
                                     <i id="icon-mobile" class="fa fa-eye-slash"></i>
                                 </button>
                             </div>
+                            <div class="form-text mb-0 p-0 text-black opacity-25">
+                                Sua senha deve conter no mínimo 8 caracteres
+                            </div>
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('senha')}">
                                 <span th:errors="*{senha}"></span>
                             </div>
@@ -411,7 +423,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <img th:src="@{/assets/images/home-lgbtqia.jpg}"
+                <img th:src="@{/assets/images/home-lgbtqia.webp}"
                      alt="Banner Recodework"
                      class="img-fluid"
                      loading="lazy"

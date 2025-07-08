@@ -10,7 +10,8 @@
     />
 
     <title>Entrar</title>
-    <link rel="shortcut icon" href="/assets/images/Logo.png" type="image/x-icon">
+
+    <link rel="shortcut icon" th:href="@{/assets/images/Logo.png}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -41,6 +42,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" th:href="@{/assets/css/pages-css/entrar.css}">
+
+    <link rel="preload" as="image" th:href="@{/assets/images/home-lgbtqia.webp}" />
 </head>
 
 <body>
@@ -48,10 +51,11 @@
 <!-- NAVBAR py-3 -->
 <nav class="navbar m-0 p-0 py-4 navbar-expand-lg bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/home}">
             <img
                     th:src="@{/assets/images/Logo.png}"
                     alt="Logo da Recodework"
+                    loading="lazy"
                     class="rounded-circle"
                     width="50"
                     height="50"
@@ -125,7 +129,7 @@
         <div class="home-section-text col-lg-6">
             <div class="login-box">
                 <h4 class="text-white fw-bold mb-4">
-                    Bem-vindo(a) <span class="d-block">Faça login</span>
+                    <span class="d-block">Faça login</span>
                 </h4>
 
                 <!-- Mensagens de feedback -->
@@ -182,6 +186,8 @@
                                 <i id="icon-desktop" class="fa fa-eye-slash"></i>
                             </button>
 
+                            <small class="mt-2 opacity-25">Sua senha deve conter no mínimo 8 caracteres</small>
+
                         </div>
                     </div>
 
@@ -205,9 +211,9 @@
                     </div>
 
                     <!-- Link de cadastro -->
-                    <p class="text-white  fw-lighter text-small mb-0">
+                    <p class="text-white fw-lighter text-small mb-0">
                         Primeiro acesso?
-                        <a th:href="@{/cadastro}" class="text-decoration-none fw-lighter text-white"
+                        <a th:href="@{/cadastro}" class="fw-lighter text-white"
                         >Crie sua conta</a
                         >
                     </p>
@@ -225,7 +231,7 @@
             <div class="col-md-6 home-tablet-text mb-md-0">
                 <div class="login-box">
                     <h4 class="text-white fw-bolder mb-4">
-                        Bem-vindo(a) <span class="d-block">Faça login</span>
+                        <span class="d-block">Faça login</span>
                     </h4>
 
                     <!-- Mensagens de feedback -->
@@ -282,6 +288,8 @@
                                         onclick="toggleSenha('senha-tablet', 'icon-tablet')">
                                     <i id="icon-tablet" class="fa fa-eye-slash"></i>
                                 </button>
+
+                                <small class="mt-2 mb-0 text-black opacity-25">Sua senha deve conter no mínimo 8 caracteres</small>
                             </div>
                         </div>
 
@@ -306,7 +314,7 @@
                         <!-- Link de cadastro -->
                         <p class="text-black fw-lighter text-small mb-0">
                             Primeiro acesso?
-                            <a th:href="@{/cadastro}" class="text-decoration-none fw-lighter text-black"
+                            <a th:href="@{/cadastro}" class="fw-lighter text-black"
                             >Crie sua conta</a
                             >
                         </p>
@@ -315,7 +323,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <img th:src="@{/assets/images/home-lgbtqia.jpg}"
+                <img th:src="@{/assets/images/home-lgbtqia.webp}"
                      alt="Banner ilustrativo Recodework"
                      class="img-fluid"
                      loading="lazy"/>
@@ -331,7 +339,7 @@
             <div class="col-12 order-1">
                 <div class="login-box">
                     <h4 class="text-white fw-bold mb-4">
-                        Bem-vindo(a) <span class="d-block">Faça login</span>
+                        <span class="d-block">Faça login</span>
                     </h4>
 
                     <!-- Mensagens de feedback -->
@@ -373,20 +381,25 @@
                         </div>
 
                         <!-- Campo Senha -->
-                        <div>
+                        <div class="mb-3 position-relative">
                             <div class="input-group">
                                 <span class="input-group-text bg-white"><i class="fa fa-lock"></i></span>
                                 <input type="password" class="form-control" name="senha"
                                        placeholder="Senha" required id="senha-mobile">
-                                <button class="btn btn-outline-secondary shadow-sm mobile-btn-enhance" type="button"
+                                <button class="btn btn-outline-secondary" type="button"
                                         onclick="toggleSenha('senha-mobile', 'icon-mobile')">
                                     <i id="icon-mobile" class="fa fa-eye-slash"></i>
                                 </button>
+
+                            </div>
+
+                            <div class="form-text mb-0 p-0 text-black opacity-25">
+                                Sua senha deve conter no mínimo 8 caracteres
                             </div>
                         </div>
 
                         <!-- Botão Entrar -->
-                        <div class="d-grid">
+                        <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-login">Entrar</button>
                         </div>
 
@@ -404,9 +417,9 @@
                         </div>
 
                         <!-- Link de cadastro -->
-                        <p class="text-black fw-lighter text-small mb-0">
+                        <p class="text-black fw-lighter m-0 p-0 text-small mb-0">
                             Primeiro acesso?
-                            <a th:href="@{/cadastro}" class="text-decoration-none fw-lighter text-black"
+                            <a th:href="@{/cadastro}" class="fw-lighter text-black"
                             >Crie sua conta</a
                             >
                         </p>
@@ -415,13 +428,12 @@
             </div>
 
             <div class="col-12">
-                <img th:src="@{/assets/images/home-lgbtqia.jpg}"
+                <img th:src="@{/assets/images/home-lgbtqia.webp}"
                      alt="Banner Recodework"
                      class="img-fluid"
                      loading="lazy"
                 />
             </div>
-
         </div>
     </div>
 </section>

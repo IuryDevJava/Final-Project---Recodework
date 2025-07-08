@@ -136,7 +136,7 @@ body {
    SEÇÃO HOME
    ===================== */
 .home-section {
-  background-image: url("/assets/images/home-lgbtqia.jpg");
+  background-image: url("/assets/images/home-lgbtqia.webp");
   background-size: cover;
   background-position: center right;
   background-repeat: no-repeat;
@@ -319,12 +319,24 @@ body {
     max-width: 100%;
   }
 
+  .login-box .input-group {
+    margin-bottom: var(--margin-entreitens);
+  }
+
+  .form-text{
+    margin-top: -15px;
+  }
+
   .home-mobile-img img {
     border-radius: var(--borda-arredondada);
   }
 
   .button-socials {
     margin-bottom: var(--margin-entreitens);
+  }
+
+  .divider{
+    background-color: #00000041;
   }
 
   .mobile-btn-enhance {
@@ -406,6 +418,10 @@ body {
     margin-bottom: var(--margin-entreitens);
   }
 
+  .divider{
+    background-color: #00000041;
+  }
+
   .footer-brand-col {
     padding-right: 0;
     margin-bottom: 2rem;
@@ -413,6 +429,10 @@ body {
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
+  .divider{
+    background-color: white;
+  }
+
   .footer-class .row {
     --bs-gutter-x: 1.5rem;
   }

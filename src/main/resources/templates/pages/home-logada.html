@@ -74,6 +74,7 @@
                     th:src="@{/assets/images/Logo.png}"
                     alt="Logo da Recodework"
                     class="rounded-circle"
+                    loading="lazy"
                     width="50"
                     height="50"
                     style="background-color: rgba(32, 32, 32, 0.178)"
@@ -141,7 +142,7 @@
                                 class="rounded-circle d-flex align-items-center justify-content-center"
                                 style="width: 36px; height: 36px"
                         >
-                            <img th:src="@{/assets/images/img-foto-perfil.png}" alt=""/>
+                            <img th:src="@{/assets/images/img-foto-perfil.png}" loading="lazy" alt="Foto de perfil"/>
                         </div>
                     </a>
                     <ul
@@ -242,6 +243,7 @@
                                     th:src="@{/assets/images/vagas-nomad.png}"
                                     width="35"
                                     height="35"
+                                    loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Social Media</h5>
@@ -267,6 +269,7 @@
                             <img th:src="@{/assets/images/netlify-img.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Social Media Assistant</h5>
@@ -293,6 +296,7 @@
                                     th:src="@{/assets/images/dropbox-img.png}"
                                     width="35"
                                     height="35"
+                                    loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Desenvolvedor Full Stack</h5>
@@ -322,6 +326,7 @@
                                     th:src="@{/assets/images/maze-img.png}"
                                     width="35"
                                     height="35"
+                                    loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Brand Designer</h5>
@@ -351,6 +356,7 @@
                                     th:src="@{/assets/images/oracle_logo_icon_168918.webp}"
                                     width="35"
                                     height="35"
+                                    loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Interactive Developer</h5>
@@ -378,6 +384,7 @@
                                     th:src="@{/assets/images/udacity.png}"
                                     width="35"
                                     height="35"
+                                    loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Social Media</h5>
@@ -405,6 +412,7 @@
                             <img th:src="@{/assets/images/google-logo-2025-6ffb.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Back-End Developer</h5>
@@ -432,6 +440,7 @@
                             <img th:src="@{/assets/images/microsoft.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">DevOps Engineer</h5>
@@ -459,6 +468,7 @@
                             <img class="rounded-circle" th:src="@{/assets/images/IBM.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Data Scientist</h5>
@@ -484,6 +494,7 @@
                             <img th:src="@{/assets/images/github.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">QA Tester</h5>
@@ -507,6 +518,7 @@
                             <img th:src="@{/assets/images/nvidia.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Machine Learning Engineer</h5>
@@ -532,6 +544,7 @@
                             <img th:src="@{/assets/images/vecteezy_ai-and-data-cluster-network-icon_58274027.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Cyber Security Analyst</h5>
@@ -559,6 +572,7 @@
                             <img th:src="@{/assets/images/vecteezy_rejected-cross-mark-icon-in-flat-style_22062827.png}"
                                  width="35"
                                  height="35"
+                                 loading="lazy"
                             />
                             <div class="w-100">
                                 <h5 class="mb-1">Product Manager</h5>
@@ -878,6 +892,7 @@
                                 th:src="@{/assets/images/Analistadados.jpg}"
                                 class="card-img-top rounded-4"
                                 alt="Analista de Dados"
+                                loading="lazy"
                         />
                     </div>
                     <div class="card-body">
@@ -921,6 +936,7 @@
                         <img th:src="@{/assets/images/Socialmedia.jpg}"
                              class="card-img-top rounded-4"
                              alt="Social Media"
+                             loading="lazy"
                         />
                     </div>
                     <div class="card-body">
@@ -996,6 +1012,9 @@
                 <div class="d-flex flex-column flex-md-row gap-3">
                     <a href="https://wa.me/5521991504497?text=Olá%20gostaria%20de%20saber%20mais%20sobre%20apoio%20!" target="_blank" class="text-decoration-none whatsapp-btn">WhatsApp</a>
                     <a href="#" id="chatToggle" class="chat-btn text-decoration-none"
+                       data-bs-toggle="tooltip" data-bs-placement="right"
+                       data-bs-custom-class="custom-tooltip"
+                       data-bs-title="Entre no chat e peça ajuda."
                     >Chat <span id="unreadBadge" class="d-none badge bg-danger rounded-pill">!</span></a
                     >
                 </div>
@@ -1004,6 +1023,7 @@
                 <img th:src="@{/assets/images/img-apoio-chat.png}"
                      alt="Suporte LGBTQIA+"
                      class="img-fluid"
+                     loading="lazy"
                      style="max-width: 349px; height: auto"
                 />
             </div>
@@ -1127,7 +1147,17 @@
     <p class="mb-2">© 2025 Recodework. Todos os direitos reservados</p>
 </div>
 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    });
+</script>
+
+
 <!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>

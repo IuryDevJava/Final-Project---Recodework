@@ -98,7 +98,7 @@ body {
    SEÇÃO HOME
    ===================== */
 .home-section {
-  background-image: url("/assets/images/home-lgbtqia.jpg");
+  background-image: url("/assets/images/home-lgbtqia.webp");
   background-size: cover;
   background-position: center right;
   background-repeat: no-repeat;
@@ -165,7 +165,10 @@ body {
   box-shadow: none;
   border-color: transparent;
   outline: none;
-  
+}
+
+.form-text {
+  margin-top: -15px
 }
 
 /* =====================
@@ -301,8 +304,7 @@ body {
     );
   }
   .home-tablet img {
-    height: 442px;
-
+    height: 473px;
   }
 
   .cadastro-box {
