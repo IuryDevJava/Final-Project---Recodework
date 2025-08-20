@@ -56,6 +56,7 @@ public class OpenAIService {
     private final Map<String, String> responseCache = new ConcurrentHashMap<>();
 
     public String getChatResponse(String userMessage) {
+        log.info("OpenAIService : iniciando o método getChatResponse() - userMessage = {}", userMessage);
         String lowerMessage = userMessage.toLowerCase().trim();
 
         if (responseCache.containsKey(lowerMessage)) {
@@ -82,11 +83,14 @@ public class OpenAIService {
             }
         }
 
+        log.info("OpenAIService : finalizando o método getChatResponse() - lowerMessage = {}", lowerMessage);
         return cacheAndReturn(lowerMessage, getDefaultResponse(lowerMessage));
     }
 
     private String cacheAndReturn(String key, String value) {
+        log.info("OpenAIService : iniciando o método cacheAndReturn() - key = {}, value = {}", key, value);
         responseCache.put(key, value);
+        log.info("OpenAIService : finalizando método cacheAndReturn() - value = {}", value);
         return value;
     }
 
@@ -161,6 +165,7 @@ public class OpenAIService {
     }
 
     private static String getDefaultResponse(String input) {
+        log.info("OpenAIService : iniciando o método getDefaultResponse() - input = {}", input);
         return """
             🌈 Não entendi completamente sua solicitação.
             
@@ -173,6 +178,7 @@ public class OpenAIService {
     }
 
     private String tryOpenAI(String userMessage) throws Exception {
+        log.info("OpenAIService : iniciando o método tryOpenAI() - userMessage = {}", userMessage);
         String requestBody = String.format("""
             {
                 "model": "gpt-3.5-turbo",
